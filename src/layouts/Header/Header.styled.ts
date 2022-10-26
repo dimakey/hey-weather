@@ -7,6 +7,7 @@ export const HeaderSearch = styled.div`
   flex-grow: 1;
   max-width: 560px;
   min-width: 320px;
+  z-index: 10;
 `;
 
 export const Header = styled.header`
