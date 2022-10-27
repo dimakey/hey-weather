@@ -1,16 +1,16 @@
 import React from "react";
 import * as S from "./Button.styled";
 
-// HTMLButtonElement
 interface ButtonProps {
   children: React.ReactNode;
   action?: "primary" | "secondary";
-  buttonSize?: "sm" | "md";
+  size?: "sm" | "md";
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
   hasOnlyIcon?: boolean;
   onClick?: () => void;
   disabled: boolean;
+  style?: React.CSSProperties;
 }
 
 const Button = ({ children, icon, iconPosition, ...props }: ButtonProps) => {
@@ -25,7 +25,7 @@ const Button = ({ children, icon, iconPosition, ...props }: ButtonProps) => {
 
 Button.defaultProps = {
   action: "primary",
-  buttonSize: "sm",
+  size: "sm",
   iconPosition: "left",
   hasOnlyIcon: false,
   disabled: false,

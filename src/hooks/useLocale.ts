@@ -25,7 +25,7 @@ export const localeData = {
         title1: "We're sorry!",
         title2: "Page not found",
         subtitle: "Sadly this page you requested was not found!",
-        backButtonTitle: "Back on main",
+        backButtonTitle: "Back to home",
       },
       modal: {
         settings: "Settings",

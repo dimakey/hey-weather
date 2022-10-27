@@ -3,8 +3,8 @@ import { paddings } from "../../styles/variables";
 
 interface StyledButtonProps {
   action?: string;
-  hasIconOnly?: boolean;
-  buttonSize?: "sm" | "md";
+  hasOnlyIcon?: boolean;
+  size?: "sm" | "md";
 }
 
 export const Button = styled.button<StyledButtonProps>`
@@ -12,16 +12,15 @@ export const Button = styled.button<StyledButtonProps>`
   align-items: center;
   justify-content: center;
 
-  line-height: 1;
   font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
 
   margin: 0;
   border: none;
 
   gap: 8px;
-
   border-radius: ${paddings.xsm};
-  padding: ${paddings.sm} ${paddings.l};
 
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.15);
 
@@ -43,7 +42,6 @@ export const Button = styled.button<StyledButtonProps>`
 
   &:disabled {
     pointer-events: none;
-    color: gray;
     opacity: 0.5;
   }
 
@@ -61,10 +59,18 @@ export const Button = styled.button<StyledButtonProps>`
           &:active {
             box-shadow: inset 0 4px 25px rgba(255, 255, 255, 0.15);
           }
+
+          &:disabled {
+            color: ${({ theme }) => theme.colors.body500};
+          }
         `;
       case "primary":
         return css`
           box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5);
+
+          &:disabled {
+            color: ${({ theme }) => theme.colors.black500};
+          }
         `;
 
       default:
@@ -72,20 +78,20 @@ export const Button = styled.button<StyledButtonProps>`
     }
   }}
 
-  ${({ hasIconOnly, buttonSize }) => {
+  ${({ hasOnlyIcon, size }) => {
     // Button sizes
-    switch (buttonSize) {
+    switch (size) {
       case "sm":
         return css`
-          ${hasIconOnly ? "width: 32px;padding: 8px;" : "padding: 4px 12px;"}
-          border-radius: 4px;
-          height: 32px;
+          ${hasOnlyIcon
+            ? "height: 32px; width: 32px; padding: 4px;"
+            : "padding: 4px 12px;"}
         `;
       case "md":
         return css`
-          ${hasIconOnly ? "width: 40px; padding: 8px;" : "padding: 8px 16px;"}
-          border-radius: 8px;
-          height: 40px;
+          ${hasOnlyIcon
+            ? "width: 40px; height: 40px; padding: 8px;"
+            : "padding: 8px 16px;"}
         `;
       default:
         return;

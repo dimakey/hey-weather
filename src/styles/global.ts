@@ -13,11 +13,13 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
+  html * {
     font-family: "PTRootUIWeb", sans-serif;
+  }
+
+  body {
     font-size: 16px;
     background-color: ${({ theme }) => theme.colors.bg};
-
     color: ${({ theme }) => theme.colors.body900};
     overflow: visible;
     min-height: 100vh;
@@ -65,14 +67,12 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-
   /* root element */
   #root {
     min-height: 100vh;
   }
 
   /* swiper global  customizations */
-
   .swiper-scrollbar {
     left: 0;
     background-color: ${({ theme }) => theme.colors.surfaceSecondary};

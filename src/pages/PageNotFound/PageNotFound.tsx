@@ -31,7 +31,11 @@ const PageNotFound: React.FC<PageNotFoundProps> = () => {
               <span>{data.pages.error404.title2}</span>
             </S.Title>
             <S.Subtitle>{data.pages.error404.subtitle}</S.Subtitle>
-            <Button icon={<Back />} action="primary" onClick={handleBackButton}>
+            <Button
+              icon={<Back />}
+              onClick={handleBackButton}
+              style={{ maxWidth: 360, minWidth: 240 }}
+            >
               {data.pages.error404.backButtonTitle}
             </Button>
           </S.TextGroup>

@@ -16,7 +16,7 @@ const TestPage = () => {
         }}
       >
         <Button>Primary</Button>
-        <Button buttonSize="md">Primary md</Button>
+        <Button size="md">Primary md</Button>
 
         <Button disabled icon={<TestIcon />}>
           Icon test disabled: left
@@ -30,7 +30,7 @@ const TestPage = () => {
           Icon test: right
         </Button>
 
-        <Button hasOnlyIcon={true}>
+        <Button hasOnlyIcon size="md">
           <TestIcon />
         </Button>
 
@@ -38,8 +38,22 @@ const TestPage = () => {
           <TestIcon />
         </Button>
 
+        <Button action="primary" size="sm">
+          Long description button, <br />
+          let's test it, another string
+        </Button>
+
+        <Button action="primary" size="md">
+          Long description button, <br />
+          let's test it, another string
+        </Button>
+
+        <Button action="secondary" size="md" hasOnlyIcon>
+          <TestIcon />
+        </Button>
+
         <Button action="secondary">Secondary</Button>
-        <Button action="secondary" buttonSize="md">
+        <Button action="secondary" size="md">
           Secondary Md
         </Button>
         <Button action="secondary" icon={<TestIcon />}>

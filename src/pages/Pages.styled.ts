@@ -76,6 +76,7 @@ export const TextGroup = styled.div`
 
   @media (max-width: ${breakpoints.tablet}) {
     text-align: center;
+    align-items: center;
     gap: 24px;
   }
 

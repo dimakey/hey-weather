@@ -2,9 +2,8 @@ export const theme = {
   colors: {
     primary: "#87b6e9",
     secondary: "#f1cf6f",
-    // accent: "hsl(43, 99%, 57%)",
-    accent: "#ffa148",
-    accentHover: "hsl(43, 99%, 45%)",
+    accent: "hsl(37, 98%, 63%)",
+    accentHover: "hsl(30, 80%, 55%)",
     focus: "hsla(192, 94%, 44%, 75%)",
     bg: "#302f5b",
     bg300: "#4a4385",

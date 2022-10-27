@@ -35,9 +35,7 @@ export const CityNotify = ({ city, loc }: NotifyProps) => {
   return (
     <S.NotifyWrapper>
       <S.NotifyText>{yourCityMessage}</S.NotifyText>
-      <Button onClick={handleNotifyClick} buttonSize="sm" action="primary">
-        {data.notify.buttonMessage}
-      </Button>
+      <Button onClick={handleNotifyClick}>{data.notify.buttonMessage}</Button>
     </S.NotifyWrapper>
   );
 };

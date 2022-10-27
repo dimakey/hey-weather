@@ -73,7 +73,7 @@ export const SettingsModal = () => {
         <S.Wrapper>
           <S.Header>
             <S.Title>{data.pages.modal.settings}</S.Title>
-            <Button action="secondary" hasOnlyIcon={true} onClick={closeModal}>
+            <Button action="secondary" hasOnlyIcon onClick={closeModal}>
               <Cross />
             </Button>
           </S.Header>
@@ -132,9 +132,7 @@ export const SettingsModal = () => {
             </S.ListItem>
           </S.List>
           <S.ButtonGroup>
-            <Button action="primary" onClick={handleSaveButton}>
-              {data.pages.modal.save}
-            </Button>
+            <Button onClick={handleSaveButton}>{data.pages.modal.save}</Button>
           </S.ButtonGroup>
         </S.Wrapper>
       </ModalWrapper>
