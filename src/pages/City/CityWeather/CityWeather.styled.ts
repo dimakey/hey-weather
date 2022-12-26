@@ -31,7 +31,7 @@ export const CurrentTime = styled.time`
   text-align: center;
   padding: 6px 12px;
   border-radius: 6px;
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: ${({ theme }) => theme.colors.surfaceSecondary};
 `;
 
 export const WeatherHeader = styled.div`
@@ -41,6 +41,11 @@ export const WeatherHeader = styled.div`
   gap: 8px;
   margin-bottom: 4px;
 
+  img {
+    width: 88px;
+    height: 88px;
+  }
+
   @media (max-width: ${breakpoints.mobile}) {
     flex-direction: row;
   }
@@ -49,16 +54,6 @@ export const WeatherHeader = styled.div`
 export const WeatherTemp = styled.div`
   font-size: 64px;
   font-weight: 500;
-`;
-
-export const WeatherIcon = styled.img`
-  width: 88px;
-  height: 88px;
-
-  @media (max-width: ${breakpoints.mobile}) {
-    width: 88px;
-    height: 88px;
-  }
 `;
 
 export const WeatherMain = styled.div`

@@ -60,6 +60,16 @@ export const RADIO_ITEMS = {
       label: "Ru",
     },
   ],
+  theme: [
+    {
+      value: "dark",
+      label: "Dark",
+    },
+    {
+      value: "light",
+      label: "Light",
+    },
+  ],
   temp: [
     {
       value: "celsius",

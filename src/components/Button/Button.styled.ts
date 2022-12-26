@@ -24,11 +24,12 @@ export const Button = styled.button<StyledButtonProps>`
 
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.15);
 
-  // Primary styling
-  background-color: ${({ theme }) => theme.colors.accent};
+  // Primary button styling
+  color: ${({ theme }) => theme.colors.buttonPrimaryText};
+  background-color: ${({ theme }) => theme.colors.buttonPrimaryBg};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.accentHover};
+    background-color: ${({ theme }) => theme.colors.buttonPrimaryBgHover};
   }
 
   &:focus {
@@ -42,35 +43,29 @@ export const Button = styled.button<StyledButtonProps>`
 
   &:disabled {
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 0.33;
   }
 
   ${({ theme, action }) => {
     switch (action) {
       case "secondary":
         return css`
-          color: ${theme.colors.body900};
-          background-color: ${theme.colors.surface};
+          color: ${theme.colors.buttonSecondaryText};
+          background-color: ${theme.colors.buttonSecondaryBg};
 
+          // Hover effect ?
           &:hover {
-            background-color: ${theme.colors.surfaceSecondary};
+            background-color: ${theme.colors.buttonSecondaryBgHover};
           }
 
           &:active {
             box-shadow: inset 0 4px 25px rgba(255, 255, 255, 0.15);
           }
-
-          &:disabled {
-            color: ${({ theme }) => theme.colors.body500};
-          }
         `;
+
       case "primary":
         return css`
           box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5);
-
-          &:disabled {
-            color: ${({ theme }) => theme.colors.black500};
-          }
         `;
 
       default:

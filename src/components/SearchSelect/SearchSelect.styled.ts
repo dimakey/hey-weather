@@ -4,7 +4,6 @@ export const Option = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  color: #333;
 `;
 
 export const OptionValue = styled.strong`
@@ -30,5 +29,5 @@ export const SearchIconContainer = styled.span<SearchIconSvgProps>`
 
   // stiling search icon in react-select component
   color: ${({ isFocused, theme }) =>
-    isFocused ? theme.colors.bg300 : theme.colors.white200};
+    isFocused ? theme.colors.body300 : theme.colors.body100};
 `;

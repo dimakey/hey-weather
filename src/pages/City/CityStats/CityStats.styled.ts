@@ -10,7 +10,7 @@ export const CityStats = styled.ul`
 `;
 
 export const Item = styled.li`
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: ${({ theme }) => theme.colors.surfaceSecondary};
   width: calc(50% - 4px);
   display: flex;
   gap: 8px;

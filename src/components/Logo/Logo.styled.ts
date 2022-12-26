@@ -7,7 +7,7 @@ export const LogoLink = styled(Link)`
 `;
 
 export const ActiveWord = styled.span`
-  color: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.accentHover};
 `;
 
 export const Word = styled.span`
@@ -37,7 +37,4 @@ export const Logo = styled.div`
 export const LogoImg = styled.img`
   width: 28px;
   height: 28px;
-
-  @media (max-width: ${breakpoints.mobile}) {
-  }
 `;

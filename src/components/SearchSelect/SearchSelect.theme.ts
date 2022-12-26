@@ -1,8 +1,9 @@
 import { StylesConfig } from "react-select";
-import { theme } from "../../styles/theme";
+import { DefaultTheme } from "styled-components";
 import { SelectOption, SelectSize } from "../../types/types";
 
 export const getStyleBySize = (
+  theme: DefaultTheme,
   size: SelectSize = "small"
 ): StylesConfig<SelectOption> => {
   const isSizeIsSmall = size === "small";
@@ -10,7 +11,6 @@ export const getStyleBySize = (
   return {
     container: (base) => ({
       ...base,
-      color: "#4a4385",
       fontSize: isSizeIsSmall ? 20 : 22,
       fontWeight: 500,
     }),
@@ -19,28 +19,40 @@ export const getStyleBySize = (
       padding: isSizeIsSmall ? "0 10px" : "4px 12px",
       border: 0,
       borderRadius: "8px",
-      backgroundColor: isFocused ? theme.colors.white : theme.colors.black300,
-    }),
-    placeholder: (base, { isFocused }) => ({
-      ...base,
-      color: isFocused ? theme.colors.black500 : theme.colors.white300,
-      opacity: 0.5,
+      outline: isFocused ? `2px solid ${theme.colors.primary}` : undefined,
+      backgroundColor: isFocused
+        ? theme.colors.searchBgFocus
+        : theme.colors.searchBg,
     }),
     valueContainer: (base) => ({
       ...base,
       padding: "4px",
       marginLeft: isSizeIsSmall ? 2 : 4,
     }),
-    option: (base) => ({
+    placeholder: (base, { isFocused }) => ({
       ...base,
-      fontSize: 18,
+      color: isFocused ? theme.colors.body300 : theme.colors.body100,
+    }),
+    input: (base) => ({
+      ...base,
+      color: theme.colors.body900,
     }),
     menu: (base) => ({
       ...base,
+      backgroundColor: `${theme.colors.searchBgFocus}`,
       borderRadius: "8px",
       padding: "4px 0",
     }),
-
+    option: (base, { isSelected, isFocused }) => ({
+      ...base,
+      fontSize: 18,
+      backgroundColor: isSelected
+        ? `${theme.colors.secondary}`
+        : isFocused
+        ? `${theme.colors.secondary}`
+        : undefined,
+      color: isFocused ? `${theme.colors.black}` : `${theme.colors.body900}`,
+    }),
     indicatorSeparator: (base) => ({
       ...base,
       display: "none",

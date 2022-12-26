@@ -24,7 +24,7 @@ export const DayItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: ${({ theme }) => theme.colors.surfaceSecondary};
   border-radius: 8px;
   gap: 8px;
   padding: 8px 0;
@@ -53,12 +53,12 @@ export const DayTemp = styled.span`
 export const DayHumidity = styled.div`
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.body500};
+  color: ${({ theme }) => theme.colors.body700};
 
-  img {
-    height: 12px;
-    opacity: 0.5;
+  svg {
+    color: ${({ theme }) => theme.colors.primary};
+    opacity: 1;
   }
 `;

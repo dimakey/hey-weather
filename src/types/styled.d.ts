@@ -2,6 +2,7 @@ import "styled-coomponets";
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    type: string;
     colors: {
       primary: string;
       secondary: string;
@@ -12,16 +13,23 @@ declare module "styled-components" {
       bg300: string;
       surface: string;
       surfaceSecondary: string;
+      searchBg: string;
+      searchBgFocus: string;
       body900: string;
       body700: string;
       body500: string;
+      body300: string;
+      body100: string;
+      body50: string;
       white: string;
-      white200: string;
-      white300: string;
       black: string;
-      black300: string;
-      black500: string;
       danger: string;
+      buttonPrimaryText: string;
+      buttonPrimaryBg: string;
+      buttonPrimaryBgHover: string;
+      buttonSecondaryText: string;
+      buttonSecondaryBg: string;
+      buttonSecondaryBgHover: string;
     };
   }
 }

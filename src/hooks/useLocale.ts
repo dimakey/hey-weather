@@ -33,6 +33,10 @@ export const localeData = {
           title: "Language",
           subtitle: "Interface language",
         },
+        theme: {
+          title: "Color theme",
+          subtitle: "Dark / Light",
+        },
         temperature: {
           title: "Temperature",
           subtitle: "Air temperature",
@@ -119,6 +123,10 @@ export const localeData = {
         language: {
           title: "Язык",
           subtitle: "Язык интерфейса",
+        },
+        theme: {
+          title: "Тёмная тема",
+          subtitle: "Светлая / тёмная тема",
         },
         temperature: {
           title: "Температура",

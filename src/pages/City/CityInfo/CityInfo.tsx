@@ -1,21 +1,16 @@
 import React from "react";
-import InfoIcon from "../../../components/InfoIcon/InfoIcon";
+import { useTheme } from "styled-components";
+import ShowWeatherIcon from "../../../components/ShowWeatherIcon/ShowWeatherIcon";
 import { getWindDescription } from "../../../constants/wind-description";
 import { useDailyWeather } from "../../../hooks/useDailyWeather";
 import { useLocale } from "../../../hooks/useLocale";
-import { icons } from "../../../utils/constants";
 import * as S from "./CityInfo.styled";
 
-/**
- * Today: +5…+15°; clear, no precipitation; light winds at 3–5 m/s
- * Todo: [future] Next week: rain; +11…+19°; light winds at 4 m/s
- */
-
-// TODO: Refactor and typify this!
+// Todo: [future] Next week: rain; +11…+19°; light winds at 4 m/s
 const CityInfo = () => {
   const { data } = useLocale();
+  const theme = useTheme();
   const daily = useDailyWeather();
-
   if (!daily) return null;
 
   const today = daily[0];
@@ -40,7 +35,7 @@ const CityInfo = () => {
   return (
     <S.CityInfo>
       <S.Info>
-        <InfoIcon icon={icons.weather[today.icon]} size="md" />
+        <ShowWeatherIcon iconId={today.icon} theme={theme.type} />
         <S.InfoMessage>{dayTemplate}</S.InfoMessage>
       </S.Info>
     </S.CityInfo>

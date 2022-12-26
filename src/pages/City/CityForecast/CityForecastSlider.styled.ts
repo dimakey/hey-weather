@@ -15,7 +15,7 @@ export const ForecastDays = styled.div`
 export const ForecastDay = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: ${({ theme }) => theme.colors.surfaceSecondary};
   border-radius: ${base.radii};
   padding: 8px 12px;
   overflow: hidden;
@@ -54,11 +54,11 @@ export const ImgTempGroup = styled.div`
   align-items: center;
   gap: 16px;
   margin: 0 12px;
-`;
 
-export const Img = styled.img`
-  width: 40px;
-  height: 40px;
+  img {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const TempDescriptionGroup = styled.div`

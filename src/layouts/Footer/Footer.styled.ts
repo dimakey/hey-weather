@@ -8,7 +8,7 @@ export const Footer = styled.footer`
   align-items: center;
   padding: 24px 0;
   font-size: 16px;
-  
+
   @media (max-width: ${breakpoints.tablet}) {
   }
 
@@ -19,12 +19,7 @@ export const Footer = styled.footer`
 export const AuthorGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  svg {
-    color: #fff;
-  }
+  gap: 8px;
 `;
 
-export const AuthorName = styled.span``;
 export const Thanks = styled.span``;

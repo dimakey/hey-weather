@@ -10,16 +10,18 @@ import { useSettings } from "../hooks/useSettings";
 import {
   Language,
   PressureMeasure,
-  setSettings,
   TempMeasure,
   WindMeasure,
+  setSettings,
+  ThemeMeasure,
 } from "../redux/slices/settingsSlice";
 import { useAppDispatch } from "../redux/store";
 import { findDefaultRadioValue } from "../utils/helpers";
 import * as S from "./SettingsModal.styled";
 
 export const SettingsModal = () => {
-  const { language, windMeasure, tempMeasure, pressureMeasure } = useSettings();
+  const { language, windMeasure, tempMeasure, pressureMeasure, siteTheme } =
+    useSettings();
   const dispatch = useAppDispatch();
   const { data } = useLocale();
 
@@ -29,6 +31,7 @@ export const SettingsModal = () => {
     windMeasure,
     tempMeasure,
     pressureMeasure,
+    siteTheme,
   });
 
   const langDefaultValue = findDefaultRadioValue(
@@ -41,6 +44,7 @@ export const SettingsModal = () => {
     RADIO_ITEMS.pressure,
     pressureMeasure
   );
+  const themeDefaultValue = findDefaultRadioValue(RADIO_ITEMS.theme, siteTheme);
 
   const closeModal = () => {
     Reoverlay.hideModal();
@@ -60,6 +64,10 @@ export const SettingsModal = () => {
 
   const handleTempRadioChange = (value: TempMeasure) => {
     setLocalSettings((state) => ({ ...state, tempMeasure: value }));
+  };
+
+  const handleThemeRadioChange = (value: ThemeMeasure) => {
+    setLocalSettings((state) => ({ ...state, siteTheme: value }));
   };
 
   const handleSaveButton = () => {
@@ -89,6 +97,19 @@ export const SettingsModal = () => {
                 items={RADIO_ITEMS.language}
                 defaultValue={langDefaultValue}
                 onChange={handleLangRadioChange}
+              />
+            </S.ListItem>
+            <S.ListItem>
+              <S.ItemText>
+                <S.ItemTitle>{data.pages.modal.theme.title}</S.ItemTitle>
+                <S.ItemSubtitle>
+                  {data.pages.modal.theme.subtitle}
+                </S.ItemSubtitle>
+              </S.ItemText>
+              <RadioGroup
+                items={RADIO_ITEMS.theme}
+                defaultValue={themeDefaultValue}
+                onChange={handleThemeRadioChange}
               />
             </S.ListItem>
             <S.ListItem>

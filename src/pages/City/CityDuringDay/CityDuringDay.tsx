@@ -1,10 +1,12 @@
 import React from "react";
+import { useTheme } from "styled-components";
 import { Scrollbar } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { ReactComponent as HumiditySm } from "../../../assets/humidity-sm.svg";
+import ShowWeatherIcon from "../../../components/ShowWeatherIcon/ShowWeatherIcon";
 import WidgetHeader from "../../../components/WidgetHeader/WidgetHeader";
 import { useHourlyWeather } from "../../../hooks/useHourlyWeather";
 import { useLocale } from "../../../hooks/useLocale";
-import { icons } from "../../../utils/constants";
 import * as S from "./CityDuringDay.styled";
 
 const swiperConfig = {
@@ -21,6 +23,7 @@ const swiperConfig = {
 
 const CityDuringDay = () => {
   const { data } = useLocale();
+  const theme = useTheme();
   const duringDay = useHourlyWeather();
 
   return (
@@ -34,11 +37,15 @@ const CityDuringDay = () => {
               <S.DayItem>
                 <S.DayTime dateTime={day.dt.iso}>{day.dt.time}</S.DayTime>
                 <S.DayIcon>
-                  <img src={icons.weather[day.icon]} alt={day.description} />
+                  <ShowWeatherIcon
+                    iconId={day.icon}
+                    iconDescription={day.description}
+                    theme={theme.type}
+                  />
                 </S.DayIcon>
                 <S.DayTemp>{day.temp}</S.DayTemp>
                 <S.DayHumidity>
-                  <img src={icons.stats.humiditySm} alt="humidity, %" />
+                  <HumiditySm />
                   {day.humidity}%
                 </S.DayHumidity>
               </S.DayItem>

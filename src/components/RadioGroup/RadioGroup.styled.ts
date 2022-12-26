@@ -22,16 +22,17 @@ export const RadioItem = styled(RadioGroup.Item)`
   border: none;
   border-radius: 4px;
   min-width: 32px;
-  color: rgba(255, 255, 255, 0.5);
+  color: ${({ theme }) => theme.colors.body500};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.surface};
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.body900};
   }
 
   &[data-state="checked"] {
     background-color: ${({ theme }) => theme.colors.white};
     color: #333;
+    // color: ${({ theme }) => theme.colors.body900}
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 
     ${Label} {

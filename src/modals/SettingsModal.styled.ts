@@ -1,16 +1,13 @@
 import styled from "styled-components";
 import { breakpoints } from "../styles/variables";
 
-//background: #413671
-//  radial-gradient(100% 100% at 50% -25%, #5a59a7 0%, #413671 100%) no-repeat !important;
-
 export const ReOverlay = styled.div`
   .reOverlay__modalWrapper {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.66);
   }
 
   .reOverlay__modalContainer {
-    background-color: #302f5b !important;
+    background-color: ${({ theme }) => theme.colors.bg} !important;
     border-radius: 12px;
   }
 `;
@@ -38,7 +35,7 @@ export const Title = styled.h2`
 
 export const List = styled.ul`
   margin: 1rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid ${({ theme }) => theme.colors.body50};
 `;
 
 export const ListItem = styled.li`
@@ -46,7 +43,7 @@ export const ListItem = styled.li`
   justify-content: space-between;
   gap: 8px;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.body50};
 `;
 
 export const ItemText = styled.div`

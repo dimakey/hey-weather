@@ -94,7 +94,11 @@ export const Title = styled.h1`
   span {
     font-weight: 600;
     background-color: ${({ theme }) => theme.colors.body900};
-    background-image: linear-gradient(90deg, #8e8fe6 0%, #ffa148 100%);
+    background-image: linear-gradient(
+      to right,
+      ${({ theme }) => theme.colors.primary} 0%,
+      ${({ theme }) => theme.colors.accent} 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

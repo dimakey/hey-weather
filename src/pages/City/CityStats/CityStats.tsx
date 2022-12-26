@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocale } from "../../../hooks/useLocale";
 import { useCurrentWeather } from "../../../hooks/useCurrentWeather";
-import { icons } from "../../../utils/constants";
+import { statsIcons } from "../../../utils/constants";
 import * as S from "./CityStats.styled";
 
 const CityStats = () => {
@@ -14,7 +14,7 @@ const CityStats = () => {
     <S.CityStats>
       <S.Item>
         <S.Icon>
-          <img src={icons.stats.humidity} alt={data.weather.humidity} />
+          <img src={statsIcons.humidity} alt={data.weather.humidity} />
         </S.Icon>
         <S.TitleGroup>
           <S.Subtitle>{data.weather.humidity}</S.Subtitle>
@@ -23,7 +23,7 @@ const CityStats = () => {
       </S.Item>
       <S.Item>
         <S.Icon>
-          <img src={icons.stats.wind} alt={data.weather.wind} />
+          <img src={statsIcons.wind} alt={data.weather.wind} />
         </S.Icon>
         <S.TitleGroup>
           <S.Subtitle>{data.weather.wind}</S.Subtitle>
@@ -32,7 +32,7 @@ const CityStats = () => {
       </S.Item>
       <S.Item>
         <S.Icon>
-          <img src={icons.stats.pressure} alt={data.weather.pressure} />
+          <img src={statsIcons.pressure} alt={data.weather.pressure} />
         </S.Icon>
         <S.TitleGroup>
           <S.Subtitle>{data.weather.pressure}</S.Subtitle>
@@ -41,7 +41,7 @@ const CityStats = () => {
       </S.Item>
       <S.Item>
         <S.Icon>
-          <img src={icons.stats.visibility} alt={data.weather.visibility} />
+          <img src={statsIcons.visibility} alt={data.weather.visibility} />
         </S.Icon>
         <S.TitleGroup>
           <S.Subtitle>{data.weather.visibility}</S.Subtitle>

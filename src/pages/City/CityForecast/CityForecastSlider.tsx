@@ -1,11 +1,13 @@
 import React from "react";
+import { useTheme } from "styled-components";
+import ShowWeatherIcon from "../../../components/ShowWeatherIcon/ShowWeatherIcon";
 import { useDailyWeather } from "../../../hooks/useDailyWeather";
 import { useLocale } from "../../../hooks/useLocale";
-import { icons } from "../../../utils/constants";
 import * as S from "./CityForecastSlider.styled";
 
 const CityForecastSlider = () => {
   const { data } = useLocale();
+  const theme = useTheme();
   const daily = useDailyWeather();
 
   return (
@@ -18,9 +20,10 @@ const CityForecastSlider = () => {
           </S.TitleGroup>
 
           <S.ImgTempGroup>
-            <S.Img
-              src={icons.weather[day.icon]}
-              alt={data.weatherCondition[day.weatherId]}
+            <ShowWeatherIcon
+              iconId={day.icon}
+              iconDescription={data.weatherCondition[day.weatherId]}
+              theme={theme.type}
             />
             <S.TempDescriptionGroup>
               <S.TempGroup>

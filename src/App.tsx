@@ -2,21 +2,28 @@ import React from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import { ModalContainer } from "reoverlay";
+import { ThemeProvider } from "styled-components";
 import { ROUTES } from "./constants/routes";
+import { useSettings } from "./hooks/useSettings";
 import HomePage from "./pages/HomePage";
 import LoadingCity from "./pages/LoadingCity";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Start from "./pages/Start/Start";
 import TestPage from "./pages/TestPage";
+import GlobalStyle from "./styles/global";
+import { darkTheme, lightTheme } from "./styles/theme";
 
 function App() {
+  const { siteTheme } = useSettings();
+  const isDark = siteTheme === "dark";
+
   React.useEffect(() => {
     const element = document.querySelector("#app-preloader") as HTMLElement;
     element.style.display = "none";
   }, []);
 
   return (
-    <>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <Routes>
         <Route path="/test" element={<TestPage />} />
         <Route path={ROUTES.index} element={<HomePage />} />
@@ -26,9 +33,10 @@ function App() {
         <Route path={ROUTES.all} element={<PageNotFound />} />
       </Routes>
 
+      <GlobalStyle />
       <ModalContainer />
       <Toaster position="bottom-center" />
-    </>
+    </ThemeProvider>
   );
 }
 

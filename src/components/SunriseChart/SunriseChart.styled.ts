@@ -11,7 +11,7 @@ export const SunriseContainer = styled.div`
   display: flex;
   height: 104px;
   overflow: hidden;
-  border-bottom: 1px solid hsla(360, 100%, 100%, 0.15);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.body100};
 `;
 
 export const ImgGroup = styled.div`
@@ -19,14 +19,15 @@ export const ImgGroup = styled.div`
   align-items: flex-end;
   flex-grow: 1;
 
-  &:last-child img {
+  svg {
+    width: 40px;
+    height: 40px;
+    color: ${({ theme }) => theme.colors.primary};
+  }
+
+  &:last-child svg {
     margin-left: auto;
   }
-`;
-
-export const ImgIcon = styled.img`
-  width: 40px;
-  height: 40px;
 `;
 
 export const Chart = styled.div<SunriseChartProps>`
@@ -55,16 +56,17 @@ export const ChartImg = styled.div<SunriseChartProps>`
         ? css`
             background: radial-gradient(
                 50% 50% at 50% 50%,
-                rgba(254, 197, 36, 0.35) 0%,
-                rgba(254, 197, 36, 0) 100%
+                yellow 0%,
+                //${({ theme }) => theme.colors.surface} 0%,
+                rgba 100%
               )
               no-repeat center center;
           `
         : css`
             background: radial-gradient(
                 50% 50% at 50% 50%,
-                rgba(187, 197, 228, 0.35) 0%,
-                rgba(187, 197, 228, 0) 100%
+                rgba(147, 146, 199, 0.5) 0%,
+                rgba(147, 146, 199, 0) 100%
               )
               no-repeat center center;
           `}
@@ -78,6 +80,15 @@ export const ChartImg = styled.div<SunriseChartProps>`
     height: 208px;
 
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.25;
   }
 `;
+
+/**
+ * sun:
+ * rgba(254, 197, 36, 0.35) 0%
+ * rgba(254, 197, 36, 0) 100%
+ * night:
+ *  rgba(187, 197, 228, 0.35) 0%,
+ *                 rgba(187, 197, 228, 0) 100%
+ */

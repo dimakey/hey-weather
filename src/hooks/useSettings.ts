@@ -6,5 +6,6 @@ export const useSettings = () => {
     windMeasure: useAppSelector((state) => state.settings.windMeasure),
     tempMeasure: useAppSelector((state) => state.settings.tempMeasure),
     pressureMeasure: useAppSelector((state) => state.settings.pressureMeasure),
+    siteTheme: useAppSelector((state) => state.settings.siteTheme),
   };
 };

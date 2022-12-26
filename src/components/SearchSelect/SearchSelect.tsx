@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { components, ControlProps, OnChangeValue } from "react-select";
 import AsyncSelect from "react-select/async";
+import { useTheme } from "styled-components";
 import { cityAPI } from "../../api/city";
 import { ReactComponent as Search } from "../../assets/search.svg";
 import { useLocale } from "../../hooks/useLocale";
@@ -20,6 +21,7 @@ type SearchSelectProps = {
 
 const SearchSelect = ({ size }: SearchSelectProps) => {
   const { data } = useLocale();
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const filterSuggestionData = (data: FetchAutoCompleteData[]) => {
@@ -91,7 +93,7 @@ const SearchSelect = ({ size }: SearchSelectProps) => {
       cacheOptions
       onChange={handleOnChange}
       formatOptionLabel={formatOptionLabel}
-      styles={getStyleBySize(size)}
+      styles={getStyleBySize(theme, size)}
       loadOptions={handleSuggestions}
       noOptionsMessage={() => data.search.noOptionMessage}
       defaultOptions

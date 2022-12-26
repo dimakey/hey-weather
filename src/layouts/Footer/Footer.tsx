@@ -9,14 +9,13 @@ const Footer = () => {
 
   return (
     <S.Footer>
-      <S.AuthorGroup>
-        <GitSvg />
-        <S.AuthorName>
-          <ALink target="_blank" href="https://github.com/dimakey">
-            Dmitriy Krapivnyy
-          </ALink>
-        </S.AuthorName>
-      </S.AuthorGroup>
+      <ALink target="_blank" href="https://github.com/dimakey">
+        <S.AuthorGroup>
+          <GitSvg />
+          Dmitriy Krapivnyy
+        </S.AuthorGroup>
+      </ALink>
+
       <S.Thanks>
         {data.pages.footer.thanks}
         <ALink target="_blank" href="https://www.freepik.com/">

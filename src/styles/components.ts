@@ -3,13 +3,6 @@ import { base, breakpoints, paddings } from "./variables";
 
 export const Widget = styled.div`
   background-color: ${({ theme }) => theme.colors.surface};
-
-  //background: radial-gradient(
-  //  100% 100% at 50% 25%,
-  //  rgba(118, 111, 186, 0.15) 0%,
-  //  rgba(48, 47, 91, 0.3) 100%
-  //);
-
   border-radius: ${base.radii};
   padding: ${paddings.l};
 
@@ -48,7 +41,6 @@ export const ALink = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.white};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.body900};
   }
 `;

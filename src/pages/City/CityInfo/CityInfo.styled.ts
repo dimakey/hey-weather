@@ -12,17 +12,11 @@ export const Info = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
-`;
 
-export const InfoIcon = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.white};
+  img {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 export const InfoMessage = styled.p`

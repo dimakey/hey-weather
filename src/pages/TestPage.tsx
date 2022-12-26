@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../components/Button/Button";
 import { ReactComponent as TestIcon } from "../assets/cross.svg";
+import Button from "../components/Button/Button";
 import Layout from "../layouts/Layout";
 import { ALink } from "../styles/components";
 
