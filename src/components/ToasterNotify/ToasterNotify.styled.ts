@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { base, breakpoints } from "../../styles/variables";
+import { base } from "../../styles/variables";
 
 export const NotifyWrapper = styled.div`
   padding: 16px;
-  background-color: ${({ theme }) => theme.colors.bg300};
+  background-color: ${({ theme }) => theme.colors.notifyPopupBg};
   border-radius: ${base.radii};
   max-width: 480px;
 
@@ -11,19 +11,13 @@ export const NotifyWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  transition: all 2s ease-in-out;
+  transition: all 1.25s ease-in-out;
 
-  @media (min-width: ${breakpoints.tablet}) {
-  }
-`;
-
-export const Header = styled.h4`
-  font-size: 20px;
-  font-weight: 600;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
 `;
 
 export const NotifyText = styled.p`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.body900};
   font-size: 18px;
   font-weight: 500;
   line-height: 1.33;

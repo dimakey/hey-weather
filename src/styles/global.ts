@@ -47,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
 
 
     &:hover {
-      ${({ theme }) => theme.colors.white};
+      ${({ theme }) => theme.colors.body900};
     }
 
     &:focus {

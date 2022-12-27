@@ -7,11 +7,12 @@ export const LogoLink = styled(Link)`
 `;
 
 export const ActiveWord = styled.span`
-  color: ${({ theme }) => theme.colors.accentHover};
+  color: ${({ theme }) => theme.colors.body900};
 `;
 
 export const Word = styled.span`
   color: ${({ theme }) => theme.colors.body900};
+  transition: color 0.125s ease-in-out;
 `;
 
 export const Logo = styled.div`
@@ -25,7 +26,7 @@ export const Logo = styled.div`
 
   &:hover {
     ${Word} {
-      color: ${({ theme }) => theme.colors.accent};
+      color: ${({ theme }) => theme.colors.accentHover};
     }
   }
 

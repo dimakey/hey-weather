@@ -21,6 +21,14 @@ export const AstroTimeGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
+
+  &:nth-child(2) {
+    align-items: center;
+  }
+
+  &:last-child {
+    align-items: flex-end;
+  }
 `;
 
 export const AstroSubtitle = styled.span`

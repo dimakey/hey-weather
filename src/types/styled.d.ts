@@ -5,12 +5,11 @@ declare module "styled-components" {
     type: string;
     colors: {
       primary: string;
-      secondary: string;
       accent: string;
       accentHover: string;
       focus: string;
       bg: string;
-      bg300: string;
+      notifyPopupBg: string;
       surface: string;
       surfaceSecondary: string;
       searchBg: string;
@@ -21,8 +20,6 @@ declare module "styled-components" {
       body300: string;
       body100: string;
       body50: string;
-      white: string;
-      black: string;
       danger: string;
       buttonPrimaryText: string;
       buttonPrimaryBg: string;

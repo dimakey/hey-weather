@@ -19,7 +19,7 @@ export const getStyleBySize = (
       padding: isSizeIsSmall ? "0 10px" : "4px 12px",
       border: 0,
       borderRadius: "8px",
-      outline: isFocused ? `2px solid ${theme.colors.primary}` : undefined,
+      outline: isFocused ? `2px solid ${theme.colors.focus}` : undefined,
       backgroundColor: isFocused
         ? theme.colors.searchBgFocus
         : theme.colors.searchBg,
@@ -47,11 +47,13 @@ export const getStyleBySize = (
       ...base,
       fontSize: 18,
       backgroundColor: isSelected
-        ? `${theme.colors.secondary}`
+        ? `${theme.colors.accent}`
         : isFocused
-        ? `${theme.colors.secondary}`
+        ? `${theme.colors.accent}`
         : undefined,
-      color: isFocused ? `${theme.colors.black}` : `${theme.colors.body900}`,
+      color: isFocused
+        ? `${theme.colors.buttonPrimaryText}`
+        : `${theme.colors.body900}`,
     }),
     indicatorSeparator: (base) => ({
       ...base,

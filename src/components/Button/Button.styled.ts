@@ -23,6 +23,7 @@ export const Button = styled.button<StyledButtonProps>`
   border-radius: ${paddings.xsm};
 
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.15);
+  transition: background-color 0.125s ease-out;
 
   // Primary button styling
   color: ${({ theme }) => theme.colors.buttonPrimaryText};

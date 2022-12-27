@@ -4,6 +4,7 @@ import * as RadioGroup from "@radix-ui/react-radio-group";
 export const Label = styled.label`
   font-size: 16px;
   cursor: pointer;
+  padding: 2px;
 `;
 
 export const RadioRoot = styled(RadioGroup.Root)`
@@ -25,15 +26,13 @@ export const RadioItem = styled(RadioGroup.Item)`
   color: ${({ theme }) => theme.colors.body500};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.surface};
     color: ${({ theme }) => theme.colors.body900};
   }
 
   &[data-state="checked"] {
-    background-color: ${({ theme }) => theme.colors.white};
-    color: #333;
-    // color: ${({ theme }) => theme.colors.body900}
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    //border: 2px solid red;
+    background-color: ${({ theme }) => theme.colors.buttonSecondaryBg};
+    color: ${({ theme }) => theme.colors.body900};
 
     ${Label} {
       font-weight: 600;
