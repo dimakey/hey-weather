@@ -6,23 +6,26 @@ import Button from "../components/Button/Button";
 import RadioGroup from "../components/RadioGroup/RadioGroup";
 import { RADIO_ITEMS } from "../constants/settings";
 import { useLocale } from "../hooks/useLocale";
-import { useSettings } from "../hooks/useSettings";
+import { findDefaultRadioValue } from "../utils/helpers";
 import {
   Language,
   PressureMeasure,
   TempMeasure,
-  WindMeasure,
-  setSettings,
   ThemeMeasure,
-} from "../redux/slices/settingsSlice";
-import { useAppDispatch } from "../redux/store";
-import { findDefaultRadioValue } from "../utils/helpers";
+  useSettings,
+  WindMeasure,
+} from "../store/useSettings";
+
 import * as S from "./SettingsModal.styled";
 
 export const SettingsModal = () => {
-  const { language, windMeasure, tempMeasure, pressureMeasure, siteTheme } =
-    useSettings();
-  const dispatch = useAppDispatch();
+  const language = useSettings((state) => state.language);
+  const siteTheme = useSettings((state) => state.siteTheme);
+  const windMeasure = useSettings((state) => state.windMeasure);
+  const tempMeasure = useSettings((state) => state.tempMeasure);
+  const pressureMeasure = useSettings((state) => state.pressureMeasure);
+  const setSettings = useSettings((state) => state.setSettings);
+
   const { data } = useLocale();
 
   // local state to prevent instant change, while popup still active
@@ -71,7 +74,8 @@ export const SettingsModal = () => {
   };
 
   const handleSaveButton = () => {
-    dispatch(setSettings({ ...localSettings }));
+    setSettings({ ...localSettings });
+    // dispatch(setSettings({ ...localSettings }));
     closeModal();
   };
 

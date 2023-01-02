@@ -1,7 +1,7 @@
-import { useAppSelector } from "../redux/store";
+import { useWeather } from "../store/useWeather";
 
 export const useTimeZone = () => {
   const yourTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const timeZone = useAppSelector((state) => state.weather.data?.timezone);
+  const timeZone = useWeather((state) => state.data?.timezone);
   return timeZone ? timeZone : yourTimeZone;
 };

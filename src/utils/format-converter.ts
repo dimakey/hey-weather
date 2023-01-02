@@ -2,7 +2,7 @@ import {
   PressureMeasure,
   TempMeasure,
   WindMeasure,
-} from "../redux/slices/settingsSlice";
+} from "../store/useSettings";
 import { Converter } from "./unit-converter";
 
 const convert = new Converter();

@@ -1,7 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
-import { useAppSelector } from "../redux/store";
 
 const HomePage = () => {
   //  TODO: [feature] with favorites pages (if exists in store)

@@ -1,15 +1,15 @@
-import { formatTemperature } from "../utils/format-converter";
-import { useAppSelector } from "../redux/store";
+import { useSettings } from "../store/useSettings";
+import { useWeather } from "../store/useWeather";
 import { WeatherDaily } from "../types/responses";
+import { formatTemperature } from "../utils/format-converter";
 import { capitalize, clamp } from "../utils/helpers";
 import { useFormatDate } from "./useFormatDate";
 import { useLocale } from "./useLocale";
-import { useSettings } from "./useSettings";
 
 export const useDailyWeather = (numOfDays = 6) => {
-  const forecast = useAppSelector((state) => state.weather.data?.daily);
+  const forecast = useWeather((state) => state.data?.daily);
   const formatDate = useFormatDate();
-  const { tempMeasure } = useSettings();
+  const tempMeasure = useSettings((state) => state.tempMeasure);
   const { data } = useLocale();
 
   /** Number of forecast days. Max is 10 */

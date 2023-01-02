@@ -1,13 +1,13 @@
-import { formatTemperature } from "../utils/format-converter";
-import { useAppSelector } from "../redux/store";
+import { useSettings } from "../store/useSettings";
+import { useWeather } from "../store/useWeather";
 import { WeatherHourly } from "../types/responses";
+import { formatTemperature } from "../utils/format-converter";
 import { capitalize, clamp } from "../utils/helpers";
 import { useFormatDate } from "./useFormatDate";
-import { useSettings } from "./useSettings";
 
 export const useHourlyWeather = (numOfHours = 24) => {
-  const hourly = useAppSelector((state) => state.weather.data?.hourly);
-  const { tempMeasure } = useSettings();
+  const hourly = useWeather((state) => state.data?.hourly);
+  const tempMeasure = useSettings((state) => state.tempMeasure);
   const formatDate = useFormatDate();
 
   /** Number of forecast hours. Max is 48 */

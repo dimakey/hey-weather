@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Preloader from "../components/Preloader/Preloader";
-import { fetchWeatherByGeo } from "../redux/actions/weatherAction";
-import { useAppDispatch, useAppSelector } from "../redux/store";
+import { useWeather } from "../store/useWeather";
 import City from "./City/City";
 import PageNotFound from "./PageNotFound/PageNotFound";
 
 const LoadingCity = () => {
-  const loading = useAppSelector((state) => state.weather.loading);
-  const dispatch = useAppDispatch();
+  const fetchWeather = useWeather((state) => state.fetchWeather);
+  const status = useWeather((state) => state.status);
 
   const [searchParams] = useSearchParams();
   const cityName = searchParams.get("name");
@@ -19,22 +18,22 @@ const LoadingCity = () => {
     searchParams.has("name") ||
     (searchParams.has("lat") && searchParams.has("lon"));
 
-  const isStatusPending = loading === "pending";
-  const isStatusSucceeded = loading === "succeeded";
+  const isStatusIsPending = status === "loading";
+  const isStatusIsSucceeded = status === "success";
 
-  const hasLoadingFailedOrNoParams = !hasAnyParams || loading === "failed";
+  const hasLoadingFailedOrNoParams = !hasAnyParams || status === "error";
 
   useEffect(() => {
     if (hasAnyParams) {
-      dispatch(fetchWeatherByGeo({ cityName, lat, lon }));
+      fetchWeather({ cityName, lat, lon });
     }
   }, [lat, lon, cityName]);
 
   return (
     <>
       {hasLoadingFailedOrNoParams && <PageNotFound />}
-      {isStatusPending && <Preloader />}
-      {isStatusSucceeded && <City />}
+      {isStatusIsPending && <Preloader />}
+      {isStatusIsSucceeded && <City />}
     </>
   );
 };

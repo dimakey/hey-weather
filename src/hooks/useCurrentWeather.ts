@@ -1,23 +1,24 @@
+import { useSettings } from "../store/useSettings";
+import { useWeather } from "../store/useWeather";
 import {
   formatPressure,
   formatTemperature,
   formatWind,
 } from "../utils/format-converter";
-import { useAppSelector } from "../redux/store";
 import { capitalize } from "../utils/helpers";
 import { useFormatDate } from "./useFormatDate";
-import { useSettings } from "./useSettings";
 
 export const useCurrentWeather = () => {
-  const weatherData = useAppSelector(
-    (state) => state.weather.data
-  );
-
+  // const weatherData = useAppSelector((state) => state.weather.data);
+  const weatherData = useWeather((state) => state.data);
   if (!weatherData) return;
 
   const { current, country, city, formatted, ...weather } = weatherData;
 
-  const { tempMeasure, windMeasure, pressureMeasure } = useSettings();
+  const tempMeasure = useSettings((state) => state.tempMeasure);
+  const windMeasure = useSettings((state) => state.windMeasure);
+  const pressureMeasure = useSettings((state) => state.pressureMeasure);
+
   const formatDate = useFormatDate();
 
   return {

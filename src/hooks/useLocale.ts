@@ -3,6 +3,7 @@ import {
   weatherCondition,
   windDescription,
 } from "../constants/weather-condition";
+import { useSettings } from "../store/useSettings";
 
 export const LOCALES = {
   en: "en-US",
@@ -194,11 +195,11 @@ export const localeData = {
   },
 };
 
-// {locale, data}
+/** Get locale from store settings */
 export const useLocale = () => {
-  const lang = useAppSelector((state) => state.settings.language);
+  const language = useSettings((state) => state.language);
 
-  switch (lang) {
+  switch (language) {
     case "ru":
       return {
         locale: LOCALES.ru,
