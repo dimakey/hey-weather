@@ -4,7 +4,7 @@ import { cityAPI } from "../api/city";
 import { weatherAPI } from "../api/weather";
 import { StoreWeatherData } from "../types/types";
 
-type WeatherRequestPayload = {
+type FetchWeatherPayload = {
   cityName: string | null;
   lat: number;
   lon: number;
@@ -14,10 +14,13 @@ type WeatherState = {
   data?: StoreWeatherData;
   status: "idle" | "loading" | "success" | "error";
   error: string | {} | unknown;
-  fetchWeather: (payload: WeatherRequestPayload) => void;
 };
 
-export const useWeather = create<WeatherState>()(
+type WeatherActions = {
+  fetchWeather: (payload: FetchWeatherPayload) => void;
+};
+
+export const useWeather = create<WeatherState & WeatherActions>()(
   devtools((set) => ({
     data: undefined,
     status: "idle",

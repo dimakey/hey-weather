@@ -15,16 +15,19 @@ type SetSettingsPayload = {
   siteTheme: ThemeMeasure;
 };
 
-export type SettingsState = {
+type SettingsState = {
   language: Language;
   siteTheme: ThemeMeasure;
   windMeasure: WindMeasure;
   tempMeasure: TempMeasure;
   pressureMeasure: PressureMeasure;
+};
+
+type SettingsActions = {
   setSettings: (payload: SetSettingsPayload) => void;
 };
 
-export const useSettings = create<SettingsState>()(
+export const useSettings = create<SettingsState & SettingsActions>()(
   persist(
     (set) => ({
       language: "en",
