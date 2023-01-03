@@ -1,4 +1,3 @@
-import { useAppSelector } from "../redux/store";
 import {
   weatherCondition,
   windDescription,

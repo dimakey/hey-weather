@@ -14,4 +14,4 @@ Weather SPA application written by `React`. Allows you to know the weather in an
 
 ## Stack of technologies used:
 
-`React` `@reduxjs/toolkit` `Styled-components`
+`React` `zustand` `Styled-components`

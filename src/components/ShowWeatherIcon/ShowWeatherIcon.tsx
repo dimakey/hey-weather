@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeMeasure } from "../../redux/slices/settingsSlice";
+import { ThemeMeasure } from "../../store/useSettings";
 import { weatherIcons } from "../../utils/constants";
 
 type ShowWeatherIconProps = {
