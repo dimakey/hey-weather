@@ -75,7 +75,6 @@ export const SettingsModal = () => {
 
   const handleSaveButton = () => {
     setSettings({ ...localSettings });
-    // dispatch(setSettings({ ...localSettings }));
     closeModal();
   };
 

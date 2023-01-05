@@ -9,7 +9,6 @@ import { capitalize } from "../utils/helpers";
 import { useFormatDate } from "./useFormatDate";
 
 export const useCurrentWeather = () => {
-  // const weatherData = useAppSelector((state) => state.weather.data);
   const weatherData = useWeather((state) => state.data);
   if (!weatherData) return;
 
