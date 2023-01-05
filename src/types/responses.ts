@@ -1,10 +1,13 @@
-/** FetchIP */
+/** Fetch autocomplete */
 export interface FetchAutoCompleteData {
   city: string;
   country: string;
   lat: number;
   lon: number;
   address_line2?: string;
+  rank: {
+    importance: number;
+  };
 }
 
 /** Openweather oneCall response type */

@@ -24,17 +24,19 @@ const SearchSelect = ({ size }: SearchSelectProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
+  /** Filtering & sorting fetching data **/
   const filterSuggestionData = (data: FetchAutoCompleteData[]) => {
-    const filteredData = data.filter(
-      (fetchData) => fetchData.city && fetchData.country
-    );
-
-    return filteredData.map((fetchData) => ({
-      value: fetchData.city,
-      label: fetchData["address_line2"],
-      lat: Number(fetchData.lat.toFixed(5)),
-      lon: Number(fetchData.lon.toFixed(5)),
-    }));
+    return data
+      .filter(
+        (fetchData) => fetchData.city && fetchData.country && fetchData.rank
+      )
+      .sort((a, b) => b.rank.importance - a.rank.importance)
+      .map((fetchData) => ({
+        value: fetchData.city,
+        label: fetchData["address_line2"],
+        lat: Number(fetchData.lat.toFixed(5)),
+        lon: Number(fetchData.lon.toFixed(5)),
+      }));
   };
 
   const handleLoadOptions = async (inputValue: string) => {
