@@ -23,17 +23,13 @@ export const ForecastDay = styled.div`
 
 export const TitleGroup = styled.div`
   display: flex;
-  flex-basis: 116px;
+  flex-basis: 40%;
   flex-direction: column;
   flex-shrink: 0;
   gap: 6px;
 
-  @media (max-width: ${breakpoints.desktop}) {
-    flex-basis: 50%;
-  }
-
-  @media (max-width: ${breakpoints.tablet}) {
-    flex-basis: 116px;
+  @media (max-width: ${breakpoints.mobile}) {
+    flex-basis: 30%;
   }
 `;
 
