@@ -30,7 +30,7 @@ const CityInfo = () => {
   ${data.weekdays.today}: ${today.temp.min}...${
     today.temp.max
   }; ${weatherCondition.toLowerCase()}; ${pop};
-  ${windDescription.toLowerCase()}: ${today.windSpeed} ${data.units.ms};`;
+  ${windDescription.toLowerCase()}: ${today.windSpeedFormatted};`;
 
   return (
     <S.CityInfo>

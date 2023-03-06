@@ -62,7 +62,7 @@ export const windSpeedToDescription = [
 
 /**
  * Convert min & max wind speed to description id
- * @param windSpeed
+ * @param windSpeed (m/s)
  *
  */
 
@@ -74,5 +74,5 @@ export const getWindDescription = (windSpeed: number): number => {
   }
 
   // if nothing found get default 201 (calm wind)
-  return windSpeedToDescription[0].id
+  return windSpeedToDescription[0].id;
 };
