@@ -27,10 +27,14 @@ type SettingsActions = {
   setSettings: (payload: SetSettingsPayload) => void;
 };
 
+const browserLanguage: Language = navigator?.language?.match(/[rR][uU]/)
+  ? "ru"
+  : "en";
+
 export const useSettings = create<SettingsState & SettingsActions>()(
   persist(
     (set) => ({
-      language: "en",
+      language: browserLanguage,
       siteTheme: "dark",
       tempMeasure: "celsius",
       windMeasure: "ms",
