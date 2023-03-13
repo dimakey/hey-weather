@@ -6,6 +6,7 @@ export type WindMeasure = "kph" | "mph" | "ms" | string;
 export type TempMeasure = "celsius" | "fahrenheit" | string;
 export type PressureMeasure = "hpa" | "mmhg" | string;
 export type ThemeMeasure = "dark" | "light" | string;
+export type DuringDaySwitcherValues = "short" | "24h" | string;
 
 type SetSettingsPayload = {
   language: Language;
@@ -15,15 +16,21 @@ type SetSettingsPayload = {
   siteTheme: ThemeMeasure;
 };
 
+type SetDuringDaySwitcherPayload = {
+  duringDaySwitcher: DuringDaySwitcherValues;
+};
+
 type SettingsState = {
   language: Language;
   siteTheme: ThemeMeasure;
   windMeasure: WindMeasure;
   tempMeasure: TempMeasure;
   pressureMeasure: PressureMeasure;
+  duringDaySwitcher: DuringDaySwitcherValues;
 };
 
 type SettingsActions = {
+  setDuringDaySwitcher: (payload: SetDuringDaySwitcherPayload) => void;
   setSettings: (payload: SetSettingsPayload) => void;
 };
 
@@ -39,7 +46,12 @@ export const useSettings = create<SettingsState & SettingsActions>()(
       tempMeasure: "celsius",
       windMeasure: "ms",
       pressureMeasure: "hpa",
-      setSettings: (payload: SetSettingsPayload) =>
+      duringDaySwitcher: "24h",
+      setDuringDaySwitcher: (payload) =>
+        set(() => ({
+          ...payload,
+        })),
+      setSettings: (payload) =>
         set(() => ({
           ...payload,
         })),

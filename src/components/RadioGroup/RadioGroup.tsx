@@ -8,7 +8,6 @@ type RadioProps = {
   items: RadioGroupItem[];
 };
 
-// onValueChange(value: string): void;
 const RadioGroup = ({ defaultValue, onChange, items }: RadioProps) => {
   return (
     <RadioRoot defaultValue={defaultValue} onValueChange={onChange}>

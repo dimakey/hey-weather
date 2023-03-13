@@ -9,6 +9,7 @@ import {
   isWeekend,
   isYesterday,
 } from "date-fns";
+import { dayPartIntervals, isNumInInterval } from "./date-helpers";
 import { LOCALE_DEFAULT } from "./locales";
 
 type DateNum = Date | number;
@@ -17,6 +18,13 @@ type LocaleWeekdays = {
   tomorrow: string;
   today: string;
   yesterday: string;
+};
+
+type LocaleDayParts = {
+  morning: string;
+  day: string;
+  evening: string;
+  night: string;
 };
 
 export class FormatDate {
@@ -44,24 +52,63 @@ export class FormatDate {
     );
   }
 
-  public getRelativeWeekday(date: DateNum, localeWeekdays?: LocaleWeekdays) {
-    if (!localeWeekdays) {
-      localeWeekdays = {
-        tomorrow: "Tomorrow",
-        today: "Today",
-        yesterday: "Yesterday",
-      };
+  public getRelativeDayParts(
+    date: DateNum,
+    localeDayParts: LocaleDayParts,
+    dayIntervals = dayPartIntervals
+  ) {
+    let hour = +intlFormat(
+      this.validateDate(date),
+      {
+        hour: "2-digit",
+        hour12: false,
+        timeZone: this.timezone,
+      },
+      { locale: this.locale }
+    );
+
+    if (
+      isNumInInterval(
+        hour,
+        dayIntervals?.morning?.from,
+        dayIntervals?.morning?.to
+      )
+    ) {
+      return localeDayParts?.morning;
     }
 
+    if (isNumInInterval(hour, dayIntervals?.day?.from, dayIntervals?.day?.to)) {
+      return localeDayParts?.day;
+    }
+
+    if (
+      isNumInInterval(
+        hour,
+        dayIntervals?.evening?.from,
+        dayIntervals?.evening?.to
+      )
+    ) {
+      return localeDayParts?.evening;
+    }
+
+    if (
+      isNumInInterval(hour, dayIntervals?.night?.from, dayIntervals?.night?.to)
+    ) {
+      return localeDayParts?.night;
+    }
+  }
+
+  public getRelativeWeekday(date: DateNum, localeWeekdays?: LocaleWeekdays) {
     const validateDate = this.validateDate(date);
+
     if (isYesterday(validateDate)) {
-      return localeWeekdays.yesterday;
+      return localeWeekdays?.yesterday;
     }
     if (isToday(validateDate)) {
-      return localeWeekdays.today;
+      return localeWeekdays?.today;
     }
     if (isTomorrow(validateDate)) {
-      return localeWeekdays.tomorrow;
+      return localeWeekdays?.tomorrow;
     }
 
     return this.getWeekday(date);

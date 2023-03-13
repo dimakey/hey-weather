@@ -90,6 +90,12 @@ export const localeData = {
       today: "Today",
       tomorrow: "Tomorrow",
     },
+    dayParts: {
+      morning: "Morning",
+      day: "Afternoon",
+      evening: "Evening",
+      night: "Night",
+    },
     search: {
       placeholder: "City or place",
       noOptionMessage: "There's nothing here",
@@ -98,6 +104,7 @@ export const localeData = {
     weatherCondition: weatherCondition.en,
     other: {
       now: "Now",
+      short: "Short",
     },
   },
   ru: {
@@ -182,6 +189,12 @@ export const localeData = {
       today: "Сегодня",
       tomorrow: "Завтра",
     },
+    dayParts: {
+      morning: "Утром",
+      day: "Днём",
+      evening: "Вечером",
+      night: "Ночью",
+    },
     search: {
       placeholder: "Город или место",
       noOptionMessage: "К сожалению мы не смогли ничего найти!",
@@ -190,6 +203,7 @@ export const localeData = {
     weatherCondition: weatherCondition.ru,
     other: {
       now: "Сейчас",
+      short: "Кратко",
     },
   },
 };

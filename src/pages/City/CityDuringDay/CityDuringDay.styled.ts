@@ -18,6 +18,12 @@ export const DuringDay = styled(Widget)`
   }
 `;
 
+export const DuringDayHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const DayList = styled.div``;
 
 export const DayItem = styled.div`
