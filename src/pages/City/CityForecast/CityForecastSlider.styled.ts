@@ -27,6 +27,7 @@ export const TitleGroup = styled.div`
   flex-direction: column;
   flex-shrink: 0;
   gap: 6px;
+  overflow: hidden;
 
   @media (max-width: ${breakpoints.mobile}) {
     flex-basis: 30%;
@@ -37,6 +38,10 @@ export const Weekday = styled.span<WeekdayProps>`
   font-weight: 600;
   color: ${({ theme, isWeekend }) =>
     isWeekend ? theme.colors.danger : theme.colors.body900};
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const Date = styled.time`

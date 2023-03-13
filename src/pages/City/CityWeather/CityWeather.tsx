@@ -7,7 +7,6 @@ import CityStats from "../CityStats/CityStats";
 import * as S from "./CityWeather.styled";
 
 const CityWeather = () => {
-  // const { weather, currentTime } = useCurrentWeather();
   const currentWeather = useCurrentWeather();
   if (!currentWeather) return null;
   const { weather, currentTime } = currentWeather;
@@ -28,7 +27,7 @@ const CityWeather = () => {
             iconDescription={"weather icon"}
             theme={theme.type}
           />
-          {/*<S.WeatherIcon src={icons.weather[weather.icon]} alt="weather icon" />*/}
+          
           <S.WeatherTemp>{weather.formatTemp}</S.WeatherTemp>
         </S.WeatherHeader>
         <S.WeatherMain>
