@@ -31,7 +31,8 @@ export class FormatDate {
   constructor(
     readonly timezone: string,
     readonly locale: string = LOCALE_DEFAULT
-  ) {}
+  ) {
+  }
 
   protected validateDate(date: DateNum) {
     if (isDate(date)) {
@@ -99,6 +100,14 @@ export class FormatDate {
   }
 
   public getRelativeWeekday(date: DateNum, localeWeekdays?: LocaleWeekdays) {
+    if (!localeWeekdays) {
+      localeWeekdays = {
+        tomorrow: "Tomorrow",
+        today: "Today",
+        yesterday: "Yesterday",
+      };
+    }
+
     const validateDate = this.validateDate(date);
 
     if (isYesterday(validateDate)) {
