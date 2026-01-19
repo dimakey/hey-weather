@@ -5,17 +5,17 @@ const axiosOpenWeather = axios.create({
   baseURL: "https://api.openweathermap.org/data/2.5/",
   params: {
     appid: import.meta.env.VITE_OPENWEATHER_API,
-    units: "metric",
-  },
+    units: "metric"
+  }
 });
 
 export const weatherAPI = {
   fetchCityByCoords: ({ lat, lon }: GeoCoords) => {
-    return axiosOpenWeather.get("onecall", {
+    return axiosOpenWeather.get("weather", {
       params: {
         lat,
-        lon,
-      },
+        lon
+      }
     });
-  },
+  }
 };

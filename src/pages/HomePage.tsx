@@ -7,7 +7,6 @@ const HomePage = () => {
   // const lastVisitedCity = useAppSelector((state) => state.settings.lastCity);
   // const favoriteCity = useAppSelector((state) => state.settings.favoriteCity);
   // const navigateRoute = favoriteCity || lastVisitedCity || ROUTES.start;
-
   return <Navigate to={ROUTES.start} />;
 };
 

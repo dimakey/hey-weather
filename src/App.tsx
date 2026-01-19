@@ -25,7 +25,6 @@ function App() {
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <Routes>
-        <Route path="/test" element={<TestPage />} />
         <Route path={ROUTES.index} element={<HomePage />} />
         <Route path={ROUTES.city} element={<LoadingCity />} />
         <Route path={ROUTES.start} element={<Start />} />

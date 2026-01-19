@@ -16,7 +16,6 @@ const CityWeather = () => {
   const description = data.weatherCondition[weather.weatherId];
   const currentIsoDate = new Date().toISOString();
 
-  //TODO: alt description for ShowWeatherIcon
   return (
     <S.Weather>
       <S.CurrentTime dateTime={currentIsoDate}>{currentTime}</S.CurrentTime>
@@ -27,7 +26,7 @@ const CityWeather = () => {
             iconDescription={"weather icon"}
             theme={theme.type}
           />
-          
+
           <S.WeatherTemp>{weather.formatTemp}</S.WeatherTemp>
         </S.WeatherHeader>
         <S.WeatherMain>
