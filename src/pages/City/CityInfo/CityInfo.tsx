@@ -11,27 +11,19 @@ const CityInfo = () => {
   const { data } = useLocale();
   const daily = useDailyWeather();
   const fd = useFormatDate();
-  if (!daily) return null;
 
   const today = daily[0];
-  console.log("today daily:", today);
   const windDescriptionId = getWindDescription(today.windSpeed);
   const windDescription = data.windDescription[windDescriptionId];
   const weatherCondition = data.weatherCondition[today.weatherId];
 
-  // Precipitation probability
-  const popPercent = Math.round(today.pop * 100);
-  const pop =
-    popPercent >= 10
-      ? `${data.weather.pop.toLowerCase()}: ${popPercent}%`
-      : data.weather.noPop.toLowerCase();
-
   // Template day message
   const dayTemplate = `
-  ${data.weekdays.today}: ${today.temp.min}...${
+  ${data.weekdays.today}: ${today.temp.min}... ${
     today.temp.max
-  }; ${weatherCondition.toLowerCase()}; ${pop};
-  ${windDescription.toLowerCase()}: ${today.windSpeedFormatted};`;
+  }; ${weatherCondition.toLowerCase()}; ${data.weather.pop.toLowerCase()}: ${today.pop}%;
+  ${windDescription.toLowerCase()}`;
+
 
   return (
     <S.CityInfo>

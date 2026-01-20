@@ -21,8 +21,8 @@ const Start = () => {
           duration: 5000,
           style: {
             background: "transparent",
-            boxShadow: "none",
-          },
+            boxShadow: "none"
+          }
         });
       }
     };
@@ -34,7 +34,9 @@ const Start = () => {
       <S.Wrapper>
         <S.TitleGroup>
           <S.TextGroup>
+
             <S.Title>
+
               {data.pages.start.title1}
               {data.pages.start.title1 && <br />}
               <span>{data.pages.start.title2}</span>

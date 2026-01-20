@@ -39,12 +39,19 @@ export class FormatDate {
   ) {
   }
 
-  protected validateDate(date: DateNum) {
+  protected validateDate(date: DateNum): Date {
     if (isDate(date)) {
       return date;
     }
-    return fromUnixTime(+date);
+
+    const num = +date;
+    if (num > 10000000000) {
+      return new Date(num);
+    }
+
+    return fromUnixTime(num);
   }
+
 
   public isWeekend(date: DateNum): boolean {
     return isWeekend(this.validateDate(date));
@@ -212,9 +219,15 @@ export class FormatDate {
   }
 
   public getDayDuration(date1: DateNum, date2: DateNum) {
+    const d1 = this.validateDate(date1);
+    const d2 = this.validateDate(date2);
+
+    const start = d1 < d2 ? d1 : d2;
+    const end = d1 < d2 ? d2 : d1;
+
     return intervalToDuration({
-      start: this.validateDate(date1),
-      end: this.validateDate(date2)
+      start,
+      end
     });
   }
 

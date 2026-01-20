@@ -13,7 +13,7 @@ export const slugCity = (city: string) => {
   return slugify(city || "", {
     lower: true,
     replacement: "-",
-    remove: /[*+~.()'"!:@ь]/g,
+    remove: /[*+~.()'"!:@ь]/g
   });
 };
 
@@ -96,4 +96,16 @@ export const timeToPercent = (coords: GeoCoords) => {
 
   const percent = 100 - toPercent(currentValue, maxValue);
   return { percent, isSunPhase, sunrise, sunset, current };
+};
+
+
+export const calculatePrecipProbability = (dailyChanceOfRain: number, dailyChanceOfSnow: number): number => {
+  if (!dailyChanceOfRain && !dailyChanceOfSnow) return 0;
+
+  // For daily data, use daily_ fields; for hourly, use standard fields
+  const rain = dailyChanceOfRain || dailyChanceOfRain || 0;
+  const snow = dailyChanceOfSnow || dailyChanceOfSnow || 0;
+
+  // Returns the higher value as the general "Precipitation Probability"
+  return Math.max(rain, snow);
 };

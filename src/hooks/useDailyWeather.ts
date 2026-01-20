@@ -2,7 +2,7 @@ import { useSettings } from "../store/useSettings";
 import { useWeather } from "../store/useWeather";
 import { WeatherDaily } from "../types/responses";
 import { formatTemperature } from "../utils/format-converter";
-import { capitalize, clamp } from "../utils/helpers";
+import { calculatePrecipProbability, capitalize, clamp } from "../utils/helpers";
 import { useFormatDate } from "./useFormatDate";
 import { useLocale } from "./useLocale";
 import { getWeatherIcon } from "../constants/weather-icons";
@@ -16,7 +16,7 @@ export const useDailyWeather = (numOfDays = 6) => {
   const MIN_FORECAST_DAYS = 1;
   const MAX_FORECAST_DAYS = forecast?.length || 1;
   const totalNumOfDays = clamp(numOfDays, MIN_FORECAST_DAYS, MAX_FORECAST_DAYS);
-  console.log("forecast", forecast);
+
 
   return forecast?.slice(0, totalNumOfDays).map((forecastDay: WeatherDaily) => ({
     dt: {
@@ -33,6 +33,6 @@ export const useDailyWeather = (numOfDays = 6) => {
       min: formatTemperature(forecastDay.day["mintemp_c"], tempMeasure)
     },
     windSpeed: Number(forecastDay.day["maxwind_mph"].toFixed(1)),
-    pop: forecastDay.day["totalprecip_mm"]
+    pop: calculatePrecipProbability(forecastDay.day["daily_chance_of_rain"], forecastDay.day["daily_chance_of_snow"]),
   }));
 };

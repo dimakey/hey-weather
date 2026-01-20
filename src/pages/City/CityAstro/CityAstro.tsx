@@ -16,11 +16,11 @@ const CityAstro = () => {
   const fd = useFormatDate();
 
   console.log(dayDuration);
-  
+
   const { percent, isSunPhase, current } =
     timeToPercent(coords);
 
-  const formatDayDuration = `${dayDuration.hours}${data.units.h}:${dayDuration.minutes}${data.units.m}`;
+  const formatDayDuration = `${dayDuration.hours}${data.units.h} ${dayDuration.minutes}${data.units.m}`;
 
   return (
     <S.CityAstro>
