@@ -33,7 +33,7 @@ export const useCurrentWeather = () => {
       ? capitalize(formatDate.getLongDate(current.last_updated_epoch))
       : "",
     dateUtc: current.last_updated_epoch ?? 0,
-
+    timeZone: location.tz_id ?? "",
     astro: {
       tzOffset: weatherData.timezone_offset ?? 0,
       coords: { lat: location.lat, lon: location.lon },

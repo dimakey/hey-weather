@@ -12,6 +12,7 @@ declare module "styled-components" {
       notifyPopupBg: string;
       surface: string;
       surfaceSecondary: string;
+      surfaceTertiary: string;
       searchBg: string;
       searchBgFocus: string;
       body900: string;

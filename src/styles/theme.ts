@@ -15,6 +15,7 @@ export const darkTheme = {
     notifyPopupBg: "hsl(241, 32%, 40%)", // notify popup
     surface: "hsla(360, 100%, 100%, 3%)",
     surfaceSecondary: "hsla(360, 100%, 100%, 5%)",
+    surfaceTertiary: "hsla(360, 100%, 100%, 10%)",
     danger: "hsl(1, 78%, 69%)",
     searchBg: "hsl(240, 32%, 22%)",
     searchBgFocus: "hsl(240, 32%, 16%)",
@@ -23,8 +24,8 @@ export const darkTheme = {
     buttonPrimaryBgHover: "hsla(36, 100%, 70%)",
     buttonSecondaryText: "hsl(240, 33%, 98%)",
     buttonSecondaryBg: "hsla(360, 100%, 100%, 5%)",
-    buttonSecondaryBgHover: "hsla(360, 100%, 100%, 10%)",
-  },
+    buttonSecondaryBgHover: "hsla(360, 100%, 100%, 10%)"
+  }
 };
 
 export const lightTheme = {
@@ -42,10 +43,11 @@ export const lightTheme = {
     notifyPopupBg: "hsl(0, 0%, 100%)",
     surface: "hsla(0, 0%, 100%, 30%)",
     surfaceSecondary: "hsla(0, 0%, 100%, 40%)",
+    surfaceTertiary: "hsla(0, 0%, 100%, 50%)",
     searchBg: "hsl(240, 31%, 87%)",
     searchBgFocus: "hsl(0, 0%, 100%)",
     buttonSecondaryText: "hsl(240, 31%, 13%)",
     buttonSecondaryBg: "hsl(240, 31%, 87%)",
-    buttonSecondaryBgHover: "hsl(242, 33%, 83%)",
-  },
+    buttonSecondaryBgHover: "hsl(242, 33%, 83%)"
+  }
 };

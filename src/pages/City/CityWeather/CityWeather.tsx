@@ -4,20 +4,25 @@ import { useCurrentWeather } from "../../../hooks/useCurrentWeather";
 import { useLocale } from "../../../hooks/useLocale";
 import CityStats from "../CityStats/CityStats";
 import * as S from "./CityWeather.styled";
+import { format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
 const CityWeather = () => {
   const currentWeather = useCurrentWeather();
   if (!currentWeather) return null;
-  const { weather, currentTime } = currentWeather;
+  const { weather, dateUtc, timeZone } = currentWeather;
 
   const { data } = useLocale();
   const description = data.weatherCondition[weather.weatherId];
-  const currentIsoDate = new Date().toISOString();
+
+  const date = new Date(dateUtc * 1000);
+  const zonedDate = toZonedTime(date, timeZone);
+  const formattedTime = format(zonedDate, "EEE, MMM d  HH:mm");
 
 
   return (
     <S.Weather>
-      <S.CurrentTime dateTime={currentIsoDate}>{currentTime}</S.CurrentTime>
+      <S.CurrentTime>{formattedTime}</S.CurrentTime>
       <S.InfoWeather>
         <S.WeatherHeader>
           <ShowWeatherIcon
