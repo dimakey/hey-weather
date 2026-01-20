@@ -77,7 +77,7 @@ const CityDuringDay = () => {
                 </S.DayTime>
                 <S.DayIcon>
                   <ShowWeatherIcon
-                    iconId={hour.weatherId}
+                    iconId={hour.icon}
                     iconDescription={hour.description}
                     isDay={hour.isItDay}
                   />
