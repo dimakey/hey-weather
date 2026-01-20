@@ -1,72 +1,53 @@
-/** Fetch autocomplete */
+export interface WeatherCondition {
+  text: string;
+  icon: string;
+  code: number;
+}
+
+export interface WeatherHourly {
+  time_epoch: number;
+  time: string;
+  temp_c: number;
+  temp_f: number;
+  is_day: number;
+  condition: WeatherCondition;
+  humidity: number;
+  cloud: number;
+  feelslike_c: number;
+  vis_km: number;
+}
+
+export interface WeatherDay {
+  maxtemp_c: number;
+  mintemp_c: number;
+  avgtemp_c: number;
+  maxwind_mph: number;
+  totalprecip_mm: number;
+  daily_chance_of_rain: number;
+  daily_chance_of_snow: number;
+  condition: WeatherCondition;
+}
+
+export interface WeatherDaily {
+  date: string;
+  date_epoch: number;
+  day: WeatherDay;
+  astro: {
+    sunrise: string;
+    sunset: string;
+    moonrise: string;
+    moonset: string;
+  };
+  hour: WeatherHourly[];
+}
+
 export interface FetchAutoCompleteData {
   city: string;
   country: string;
   lat: number;
   lon: number;
   address_line2?: string;
-  rank: {
+  rank?: {
     importance: number;
   };
-}
-
-/** Openweather oneCall response type */
-export interface TempData {
-  day: number;
-  min: number;
-  max: number;
-  night: number;
-  eve: number;
-  morn: number;
-}
-
-export interface FeelsLikeData {
-  day: number;
-  night: number;
-  eve: number;
-  morn: number;
-}
-
-export interface WeatherInfoData {
-  id: number;
-  main: string;
-  description: string;
-  icon: number;
-}
-
-export interface WeatherData {
-  dt: number;
-  pressure: number;
-  humidity: number;
-  dew_point: number;
-  wind_speed: number;
-  wind_deg: number;
-  weather: WeatherInfoData[];
-}
-
-export interface WeatherCurrent extends WeatherData {
-  temp: number;
-  feels_like: number;
-  sunrise: number;
-  sunset: number;
-  uvi: number;
-  clouds: number;
-  visibility: number;
-  weather: WeatherInfoData[];
-}
-
-export interface WeatherHourly extends WeatherData, WeatherCurrent {
-  pop: number;
-}
-
-export interface WeatherDaily extends WeatherData {
-  sunrise: number;
-  sunset: number;
-  moonrise: number;
-  moonset: number;
-  temp: TempData;
-  feels_like: FeelsLikeData;
-  pop: number;
-  rain: number;
-  uvi: number;
 }

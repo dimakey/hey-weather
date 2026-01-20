@@ -11,7 +11,7 @@ type FetchWeatherPayload = {
 };
 
 type WeatherState = {
-  data?: StoreWeatherData;
+  data?: StoreWeatherData | null;
   status: "idle" | "loading" | "success" | "error";
   error: string | object | unknown;
 };

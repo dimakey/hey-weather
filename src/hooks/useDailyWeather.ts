@@ -13,26 +13,28 @@ export const useDailyWeather = (numOfDays = 6) => {
   const tempMeasure = useSettings((state) => state.tempMeasure);
   const { data } = useLocale();
 
-  const MIN_FORECAST_DAYS = 1;
-  const MAX_FORECAST_DAYS = forecast?.length || 1;
-  const totalNumOfDays = clamp(numOfDays, MIN_FORECAST_DAYS, MAX_FORECAST_DAYS);
+  if (!forecast) return [];
 
+  const totalNumOfDays = clamp(numOfDays, 1, forecast.length);
 
-  return forecast?.slice(0, totalNumOfDays).map((forecastDay: WeatherDaily) => ({
+  return forecast.slice(0, totalNumOfDays).map((forecastDay: WeatherDaily) => ({
     dt: {
-      timestamp: Number(forecastDay["date_epoch"]),
-      iso: formatDate.getISO(Number(forecastDay["date_epoch"])),
-      shortDate: formatDate.getShortDate(Number(forecastDay["date_epoch"])),
-      weekday: capitalize(formatDate.getRelativeWeekday(Number(forecastDay["date_epoch"]), data.weekdays)),
-      isWeekend: formatDate.isWeekend(Number(forecastDay["date_epoch"]))
+      timestamp: forecastDay.date_epoch,
+      iso: formatDate.getISO(forecastDay.date_epoch),
+      shortDate: formatDate.getShortDate(forecastDay.date_epoch),
+      weekday: capitalize(formatDate.getRelativeWeekday(forecastDay.date_epoch, data.weekdays)),
+      isWeekend: formatDate.isWeekend(forecastDay.date_epoch)
     },
-    weatherId: forecastDay.day?.condition?.code,
-    icon: getWeatherIcon(forecastDay.day?.condition?.code),
+    weatherId: forecastDay.day.condition.code,
+    icon: getWeatherIcon(forecastDay.day.condition.code),
     temp: {
-      max: formatTemperature(forecastDay.day["maxtemp_c"], tempMeasure),
-      min: formatTemperature(forecastDay.day["mintemp_c"], tempMeasure)
+      max: formatTemperature(forecastDay.day.maxtemp_c, tempMeasure),
+      min: formatTemperature(forecastDay.day.mintemp_c, tempMeasure)
     },
-    windSpeed: Number(forecastDay.day["maxwind_mph"].toFixed(1)),
-    pop: calculatePrecipProbability(forecastDay.day["daily_chance_of_rain"], forecastDay.day["daily_chance_of_snow"]),
+    windSpeed: Number(forecastDay.day.maxwind_mph.toFixed(1)),
+    pop: calculatePrecipProbability(
+      forecastDay.day.daily_chance_of_rain,
+      forecastDay.day.daily_chance_of_snow
+    )
   }));
 };

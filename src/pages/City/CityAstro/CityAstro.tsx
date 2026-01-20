@@ -9,20 +9,25 @@ import * as S from "./CityAstro.styled";
 
 const CityAstro = () => {
   const currentWeather = useCurrentWeather();
-  if (!currentWeather) return null;
-
   const { data } = useLocale();
-  const { dayDuration, coords, sunrise, sunset } = currentWeather.astro;
   const fd = useFormatDate();
 
-  const { percent, isSunPhase, current } =
-    timeToPercent(coords);
+  if (!currentWeather) return null;
+
+  const { dayDuration, coords, sunrise, sunset } = currentWeather.astro;
+
+  // Use the helper to get sun position
+  const { percent, isSunPhase, current } = timeToPercent(coords);
+
+  // Fallbacks to prevent "number | null" errors
+  const sunriseVal = sunrise ?? 0;
+  const sunsetVal = sunset ?? 0;
+  const currentVal = current ?? Date.now(); // Fallback to now if current is null
 
   const formatDayDuration = `${dayDuration.hours}${data.units.h} ${dayDuration.minutes}${data.units.m}`;
 
   return (
     <S.CityAstro>
-
       <WidgetHeader
         subtitle={data.widget.daylightHours}
         title={formatDayDuration}
@@ -37,32 +42,35 @@ const CityAstro = () => {
               {isSunPhase ? data.weather.sunrise : data.weather.sunset}
             </S.AstroSubtitle>
             {isSunPhase ? (
-              <S.AstroTime dateTime={fd.getISO(sunrise)}>
-                {fd.getHourMin(sunrise)}
+              <S.AstroTime dateTime={fd.getISO(sunriseVal)}>
+                {fd.getHourMin(sunriseVal)}
               </S.AstroTime>
             ) : (
-              <S.AstroTime dateTime={fd.getISO(sunset)}>
-                {fd.getHourMin(sunset)}
+              <S.AstroTime dateTime={fd.getISO(sunsetVal)}>
+                {fd.getHourMin(sunsetVal)}
               </S.AstroTime>
             )}
           </S.AstroTimeGroup>
+
           <S.AstroTimeGroup>
             <S.AstroSubtitle>{data.other.now}</S.AstroSubtitle>
-            <S.AstroTime dateTime={fd.getISO(new Date())}>
-              {fd.getHourMin(current)}
+            {/* Fix: use currentVal and ensure fd.getISO gets a number/timestamp */}
+            <S.AstroTime dateTime={fd.getISO(Date.now())}>
+              {fd.getHourMin(currentVal)}
             </S.AstroTime>
           </S.AstroTimeGroup>
+
           <S.AstroTimeGroup>
             <S.AstroSubtitle>
               {isSunPhase ? data.weather.sunset : data.weather.sunrise}
             </S.AstroSubtitle>
             {isSunPhase ? (
-              <S.AstroTime dateTime={fd.getISO(sunset)}>
-                {fd.getHourMin(sunset)}
+              <S.AstroTime dateTime={fd.getISO(sunsetVal)}>
+                {fd.getHourMin(sunsetVal)}
               </S.AstroTime>
             ) : (
-              <S.AstroTime dateTime={fd.getISO(sunrise)}>
-                {fd.getHourMin(sunrise)}
+              <S.AstroTime dateTime={fd.getISO(sunriseVal)}>
+                {fd.getHourMin(sunriseVal)}
               </S.AstroTime>
             )}
           </S.AstroTimeGroup>

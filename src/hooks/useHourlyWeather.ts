@@ -8,34 +8,26 @@ import { useFormatDate } from "./useFormatDate";
 import { useLocale } from "./useLocale";
 
 export const useHourlyWeather = (numOfHours = 24) => {
-  const hourly = useWeather((state) => state.data?.forecast?.forecastday[0].hour);
+  const hourly = useWeather((state) => state.data?.forecast?.forecastday[0]?.hour);
   const tempMeasure = useSettings((state) => state.tempMeasure);
   const formatDate = useFormatDate();
   const { data } = useLocale();
 
-  /** Number of forecast hours. Max is 48 */
-  const MAX_FORECAST_HOURS = 24;
-  const MIN_FORECAST_HOURS = 1;
-  const totalNumOfHours = clamp(
-    numOfHours,
-    MIN_FORECAST_HOURS,
-    MAX_FORECAST_HOURS
-  );
+  const totalNumOfHours = clamp(numOfHours, 1, 24);
 
+  // Use the WeatherHourly interface here
   return hourly?.slice(0, totalNumOfHours).map((hour: WeatherHourly) => ({
     dt: {
-      timestamp: Number(hour["time_epoch"]),
-      iso: formatDate.getISO(Number(hour["time_epoch"])),
-      time: formatDate.getHourMin(Number(hour["time_epoch"])),
-      dayPart: formatDate.getRelativeDayParts(Number(hour["time_epoch"]), data.dayParts)
+      timestamp: hour.time_epoch,
+      iso: formatDate.getISO(hour.time_epoch),
+      time: formatDate.getHourMin(hour.time_epoch),
+      dayPart: formatDate.getRelativeDayParts(hour.time_epoch, data.dayParts)
     },
-    weatherId: hour?.condition?.code,
-    icon: getWeatherIcon(hour?.condition?.code),
-    isItDay: Boolean(hour["is_day"]) || false,
-
+    weatherId: hour.condition.code,
+    icon: getWeatherIcon(hour.condition.code),
+    isItDay: Boolean(hour.is_day),
     humidity: hour.humidity,
-    temp: formatTemperature(hour["temp_c"], tempMeasure),
-    description: data.weatherCondition[hour.condition.code]
-    // description: capitalize(hour.weather[0].description)
+    temp: formatTemperature(hour.temp_c, tempMeasure),
+    description: data.weatherCondition[hour.condition.code] || hour.condition.text
   }));
 };

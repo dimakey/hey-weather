@@ -7,16 +7,18 @@ import ShowWeatherIcon from "../../../components/ShowWeatherIcon/ShowWeatherIcon
 import WidgetHeader from "../../../components/WidgetHeader/WidgetHeader";
 import { useHourlyWeather } from "../../../hooks/useHourlyWeather";
 import { useLocale } from "../../../hooks/useLocale";
-import { useSettings } from "../../../store/useSettings";
+import { useSettings } from "../../../store/useSettings"; // Fixed import path if necessary
 import * as S from "./CityDuringDay.styled";
+import { FormattedHourly } from "../../../types/types";
+
 
 const CityDuringDay = () => {
   const { data } = useLocale();
-  let duringDay = useHourlyWeather();
+  // Call the hook
+  let duringDay = useHourlyWeather() as unknown as FormattedHourly[];
+
   const duringDaySwitcher = useSettings((state) => state.duringDaySwitcher);
-  const setDuringDaySwitcher = useSettings(
-    (state) => state.setDuringDaySwitcher
-  );
+  const setDuringDaySwitcher = useSettings((state) => state.setDuringDaySwitcher);
 
   const isDuringDaySwitcherIsShort = duringDaySwitcher === "short";
 
@@ -43,12 +45,11 @@ const CityDuringDay = () => {
     }
   ];
 
-
+  // FIX: Added type 'FormattedHourly' to 'hour'
   if (duringDaySwitcher === "short") {
     duringDay = duringDay?.filter(
-      (hour) => Number(hour.dt.time.slice(0, 2)) % 6 === 0
+      (hour: FormattedHourly) => Number(hour.dt.time.slice(0, 2)) % 6 === 0
     );
-
   }
 
   const handleHourSwitch = (value: string) => {
@@ -67,23 +68,24 @@ const CityDuringDay = () => {
       </S.DuringDayHeader>
       <S.DayList>
         <Swiper {...duringDaySwiperConfig}>
-          {duringDay?.map((day, index) => (
+          {/* FIX: Changed 'day: WeatherDaily' to 'hour: FormattedHourly' */}
+          {duringDay?.map((hour: FormattedHourly, index: number) => (
             <SwiperSlide key={index}>
               <S.DayItem>
-                <S.DayTime dateTime={day.dt.iso}>
-                  {isDuringDaySwitcherIsShort ? day.dt.dayPart : day.dt.time}
+                <S.DayTime dateTime={hour.dt.iso}>
+                  {isDuringDaySwitcherIsShort ? hour.dt.dayPart : hour.dt.time}
                 </S.DayTime>
                 <S.DayIcon>
                   <ShowWeatherIcon
-                    iconId={day.icon}
-                    iconDescription={day.description}
-                    isDay={day.isItDay}
+                    iconId={hour.weatherId}
+                    iconDescription={hour.description}
+                    isDay={hour.isItDay}
                   />
                 </S.DayIcon>
-                <S.DayTemp>{day.temp}</S.DayTemp>
+                <S.DayTemp>{hour.temp}</S.DayTemp>
                 <S.DayHumidity>
                   <HumiditySm />
-                  {day.humidity}%
+                  {hour.humidity}%
                 </S.DayHumidity>
               </S.DayItem>
             </SwiperSlide>

@@ -30,12 +30,13 @@ const SearchSelect = ({ size }: SearchSelectProps) => {
       .filter(
         (fetchData) => fetchData.city && fetchData.country && fetchData.rank
       )
-      .sort((a, b) => b.rank.importance - a.rank.importance)
+      .sort((a, b) => (b.rank?.importance ?? 0) - (a.rank?.importance ?? 0))
       .map((fetchData) => ({
         value: fetchData.city,
-        label: fetchData["address_line2"],
+        // FIX: Added fallback for address_line2 just in case it is missing
+        label: fetchData.address_line2 ?? fetchData.city,
         lat: Number(fetchData.lat.toFixed(5)),
-        lon: Number(fetchData.lon.toFixed(5)),
+        lon: Number(fetchData.lon.toFixed(5))
       }));
   };
 
@@ -67,9 +68,9 @@ const SearchSelect = ({ size }: SearchSelectProps) => {
   };
 
   const Control = ({
-    children,
-    ...props
-  }: ControlProps<SelectOption, false>) => {
+                     children,
+                     ...props
+                   }: ControlProps<SelectOption, false>) => {
     return (
       <components.Control {...props}>
         <S.SearchIconContainer isFocused={props.isFocused} selectSize={size}>
@@ -104,7 +105,7 @@ const SearchSelect = ({ size }: SearchSelectProps) => {
 };
 
 SearchSelect.defaultProps = {
-  size: "small",
+  size: "small"
 };
 
 export default SearchSelect;

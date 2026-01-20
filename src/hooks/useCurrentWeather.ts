@@ -16,54 +16,45 @@ export const useCurrentWeather = () => {
   const pressureMeasure = useSettings((state) => state.pressureMeasure);
   const formatDate = useFormatDate();
 
-  const sunrise = formatDate.getTimeAsEpoch(weatherData?.forecast?.forecastday[0].astro.sunrise);
-  const sunset = formatDate.getTimeAsEpoch(weatherData?.forecast?.forecastday[0].astro.sunset);
-
-  const dayDuration = formatDate.getDayDuration(
-    sunset ?? 0,
-    sunrise ?? 0
-  );
-
   if (!weatherData) return null;
-  const { current, country, city, formatted, ...weather } = weatherData;
+
+  const current = weatherData.current;
+  const location = weatherData.location;
+  const firstDay = weatherData.forecast.forecastday[0];
+
+  const sunrise = formatDate.getTimeAsEpoch(firstDay.astro.sunrise);
+  const sunset = formatDate.getTimeAsEpoch(firstDay.astro.sunset);
 
   return {
-    country: country,
-    city: city,
-    formatted: formatted ?? "",
-    currentTime: current["last_updated_epoch"]
-      ? capitalize(formatDate.getLongDate(current["last_updated_epoch"]))
+    country: location.country,
+    city: location.name,
+    formatted: weatherData.formatted ?? `${location.name}, ${location.country}`,
+    currentTime: current.last_updated_epoch
+      ? capitalize(formatDate.getLongDate(current.last_updated_epoch))
       : "",
-    dateUtc: current["last_updated_epoch"] ?? 0,
+    dateUtc: current.last_updated_epoch ?? 0,
 
     astro: {
-      tzOffset: weather["timezone_offset"] ?? 0,
-      coords: {
-        lat: weather.lat ?? 0,
-        lon: weather.lon ?? 0
-      },
-      sunrise: sunrise ?? 0,
-      sunset: sunset ?? 0,
-      dayDuration: dayDuration
+      tzOffset: weatherData.timezone_offset ?? 0,
+      coords: { lat: location.lat, lon: location.lon },
+      sunrise,
+      sunset,
+      dayDuration: formatDate.getDayDuration(sunset ?? 0, sunrise ?? 0)
     },
 
     weather: {
-      temp: formatTemperature(current.temp ?? 0, tempMeasure),
-      formatTemp: formatTemperature(current["temp_c"] ?? 0, tempMeasure),
-      feelsLike: formatTemperature(current["feelslike_c"] ?? 0, tempMeasure),
-
-      // Fallback ID 800 usually represents "Clear" in OpenWeatherMap
-      weatherId: current?.condition?.code,
-      icon: getWeatherIcon(current?.condition?.code),
+      temp: formatTemperature(current.temp_c, tempMeasure),
+      formatTemp: formatTemperature(current.temp_c, tempMeasure),
+      feelsLike: formatTemperature(current.feelslike_c, tempMeasure),
+      weatherId: current.condition.code,
+      icon: getWeatherIcon(current.condition.code),
       isItDay: formatDate.isItDay(),
-
-      pressure: formatPressure(current["pressure_mb"] ?? 0, pressureMeasure),
-      humidity: current["humidity"] ?? 0,
-      visibility: current["vis_km"] ?? 0,
-
+      pressure: formatPressure(current.pressure_mb, pressureMeasure),
+      humidity: current.humidity,
+      visibility: current.vis_km,
       wind: {
-        speed: formatWind(current["wind_kph"] ?? 0, windMeasure),
-        degree: current["wind_degree"] ?? 0
+        speed: formatWind(current.wind_kph, windMeasure),
+        degree: current.wind_degree
       }
     }
   };
