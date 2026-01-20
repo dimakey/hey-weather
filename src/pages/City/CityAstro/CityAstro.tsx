@@ -12,16 +12,19 @@ const CityAstro = () => {
   if (!currentWeather) return null;
 
   const { data } = useLocale();
-  const { dayDuration, coords } = currentWeather.astro;
+  const { dayDuration, coords, sunrise, sunset } = currentWeather.astro;
   const fd = useFormatDate();
 
-  const { percent, isSunPhase, sunrise, sunset, current } =
+  console.log(dayDuration);
+  
+  const { percent, isSunPhase, current } =
     timeToPercent(coords);
 
-  const formatDayDuration = `${dayDuration.hours}${data.units.h} ${dayDuration.minutes}${data.units.m}`;
+  const formatDayDuration = `${dayDuration.hours}${data.units.h}:${dayDuration.minutes}${data.units.m}`;
 
   return (
     <S.CityAstro>
+
       <WidgetHeader
         subtitle={data.widget.daylightHours}
         title={formatDayDuration}

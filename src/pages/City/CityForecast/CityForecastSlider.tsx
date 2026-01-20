@@ -1,5 +1,4 @@
 import React from "react";
-import { useTheme } from "styled-components";
 import ShowWeatherIcon from "../../../components/ShowWeatherIcon/ShowWeatherIcon";
 import { useDailyWeather } from "../../../hooks/useDailyWeather";
 import { useLocale } from "../../../hooks/useLocale";
@@ -7,7 +6,6 @@ import * as S from "./CityForecastSlider.styled";
 
 const CityForecastSlider = () => {
   const { data } = useLocale();
-  const theme = useTheme();
   const daily = useDailyWeather();
 
   return (
@@ -23,7 +21,7 @@ const CityForecastSlider = () => {
             <ShowWeatherIcon
               iconId={day.icon}
               iconDescription={data.weatherCondition[day.weatherId]}
-              theme={theme.type}
+              isDay={true}
             />
             <S.TempDescriptionGroup>
               <S.TempGroup>

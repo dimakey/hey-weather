@@ -1,5 +1,4 @@
 import React from "react";
-import { useTheme } from "styled-components";
 import ShowWeatherIcon from "../../../components/ShowWeatherIcon/ShowWeatherIcon";
 import { useCurrentWeather } from "../../../hooks/useCurrentWeather";
 import { useLocale } from "../../../hooks/useLocale";
@@ -12,9 +11,10 @@ const CityWeather = () => {
   const { weather, currentTime } = currentWeather;
 
   const { data } = useLocale();
-  const theme = useTheme();
   const description = data.weatherCondition[weather.weatherId];
   const currentIsoDate = new Date().toISOString();
+  console.log("Current Weather: ", weather);
+
 
   return (
     <S.Weather>
@@ -23,8 +23,8 @@ const CityWeather = () => {
         <S.WeatherHeader>
           <ShowWeatherIcon
             iconId={weather.icon}
-            iconDescription={"weather icon"}
-            theme={theme.type}
+            iconDescription={description}
+            isDay={weather.isItDay}
           />
 
           <S.WeatherTemp>{weather.formatTemp}</S.WeatherTemp>

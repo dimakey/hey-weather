@@ -10,17 +10,6 @@ const CityStats = () => {
   const { data } = useLocale();
   const { weather } = currentWeather;
 
-  /**
-   * Depending on the distance show visibility in km or m,
-   * also rounding the number to 10
-   */
-  const visibilityTemplate = (meter: number = 1) => {
-    if (meter < 1000) {
-      return `${Math.round(meter / 10) * 10} m`;
-    }
-    return `${(meter / 1000).toFixed(1)} km`;
-  };
-
   return (
     <S.CityStats>
       <S.Item>
@@ -56,7 +45,7 @@ const CityStats = () => {
         </S.Icon>
         <S.TitleGroup>
           <S.Subtitle>{data.weather.visibility}</S.Subtitle>
-          <S.Title>{visibilityTemplate(weather.visibility)}</S.Title>
+          <S.Title>{weather.visibility} km</S.Title>
         </S.TitleGroup>
       </S.Item>
     </S.CityStats>

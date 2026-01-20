@@ -1,20 +1,23 @@
 import axios from "axios";
 import { GeoCoords } from "../types/types";
 
-const axiosOpenWeather = axios.create({
-  baseURL: "https://api.openweathermap.org/data/2.5/",
+const axiosWeatherApi = axios.create({
+  baseURL: "http://api.weatherapi.com/v1/forecast.json",
   params: {
-    appid: import.meta.env.VITE_OPENWEATHER_API,
-    units: "metric"
+    key: import.meta.env.VITE_WEATHERS_API,
+    days: "7",
+    aqi: "no",
+    alerts: "no"
   }
 });
 
 export const weatherAPI = {
   fetchCityByCoords: ({ lat, lon }: GeoCoords) => {
-    return axiosOpenWeather.get("weather", {
+    const q = `${lat},${lon}`;
+
+    return axiosWeatherApi.get("", {
       params: {
-        lat,
-        lon
+        q
       }
     });
   }

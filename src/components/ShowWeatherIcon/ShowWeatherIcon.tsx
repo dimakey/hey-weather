@@ -1,25 +1,30 @@
 import React from "react";
-import { ThemeMeasure } from "../../store/useSettings";
+import { useTheme } from "styled-components";
 import { weatherIcons } from "../../utils/constants";
 
 type ShowWeatherIconProps = {
   iconId: string | number;
   iconDescription?: string;
-  theme: ThemeMeasure;
+  isDay: boolean;
 };
 
 const ShowWeatherIcon = ({
-  iconId,
-  iconDescription,
-  theme,
-}: ShowWeatherIconProps) => {
+                           iconId,
+                           iconDescription,
+                           isDay = true
+                         }: ShowWeatherIconProps) => {
+
+  const theme = useTheme();
+  const suffix = isDay ? "d" : "n";
+  const iconIdSuffixed = `${iconId}${suffix}`;
+
   return (
     <>
-      {theme === "dark" && (
-        <img src={weatherIcons.dark[iconId]} alt={iconDescription} />
+      {theme.type === "dark" && (
+        <img src={weatherIcons.dark[iconIdSuffixed]} alt={iconDescription} />
       )}
-      {theme === "light" && (
-        <img src={weatherIcons.light[iconId]} alt={iconDescription} />
+      {theme.type === "light" && (
+        <img src={weatherIcons.light[iconIdSuffixed]} alt={iconDescription} />
       )}
     </>
   );

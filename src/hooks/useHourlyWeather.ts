@@ -1,19 +1,20 @@
+import { getWeatherIcon } from "../constants/weather-icons";
 import { useSettings } from "../store/useSettings";
 import { useWeather } from "../store/useWeather";
 import { WeatherHourly } from "../types/responses";
 import { formatTemperature } from "../utils/format-converter";
-import { capitalize, clamp } from "../utils/helpers";
+import { clamp } from "../utils/helpers";
 import { useFormatDate } from "./useFormatDate";
 import { useLocale } from "./useLocale";
 
 export const useHourlyWeather = (numOfHours = 24) => {
-  const hourly = useWeather((state) => state.data?.hourly);
+  const hourly = useWeather((state) => state.data?.forecast?.forecastday[0].hour);
   const tempMeasure = useSettings((state) => state.tempMeasure);
   const formatDate = useFormatDate();
   const { data } = useLocale();
 
   /** Number of forecast hours. Max is 48 */
-  const MAX_FORECAST_HOURS = 48;
+  const MAX_FORECAST_HOURS = 24;
   const MIN_FORECAST_HOURS = 1;
   const totalNumOfHours = clamp(
     numOfHours,
@@ -23,14 +24,18 @@ export const useHourlyWeather = (numOfHours = 24) => {
 
   return hourly?.slice(0, totalNumOfHours).map((hour: WeatherHourly) => ({
     dt: {
-      timestamp: hour.dt,
-      iso: formatDate.getISO(hour.dt),
-      time: formatDate.getHourMin(hour.dt),
-      dayPart: formatDate.getRelativeDayParts(hour.dt, data.dayParts),
+      timestamp: Number(hour["time_epoch"]),
+      iso: formatDate.getISO(Number(hour["time_epoch"])),
+      time: formatDate.getHourMin(Number(hour["time_epoch"])),
+      dayPart: formatDate.getRelativeDayParts(Number(hour["time_epoch"]), data.dayParts)
     },
-    icon: hour.weather[0].icon,
+    weatherId: hour?.condition?.code,
+    icon: getWeatherIcon(hour?.condition?.code),
+    isItDay: Boolean(hour["is_day"]) || false,
+
     humidity: hour.humidity,
-    temp: formatTemperature(hour.temp, tempMeasure),
-    description: capitalize(hour.weather[0].description),
+    temp: formatTemperature(hour["temp_c"], tempMeasure),
+    description: data.weatherCondition[hour.condition.code]
+    // description: capitalize(hour.weather[0].description)
   }));
 };

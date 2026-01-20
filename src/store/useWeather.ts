@@ -34,13 +34,11 @@ export const useWeather = create<WeatherState & WeatherActions>()(
         let locationData = null;
 
         // --- PHASE 1: Resolve Coordinates & Location Info ---
-
         // If a City Name is provided, we must resolve it to Lat/Lon first
         if (cityName) {
           const geoResponse = await cityAPI.fetchNameToGeo(cityName);
           const results = geoResponse?.data?.results;
-          console.log("results", results);
-          
+
           if (!results || results.length === 0) {
             set({
               status: "error",
@@ -63,7 +61,7 @@ export const useWeather = create<WeatherState & WeatherActions>()(
             status: "error",
             error: "Unable to determine location coordinates."
           });
-          return; // 🛑 Stop execution
+          return;
         }
 
         // --- PHASE 3: Fetch Data ---
@@ -93,17 +91,11 @@ export const useWeather = create<WeatherState & WeatherActions>()(
           }
         }
 
-        // --- PHASE 4: Final Safety Check & State Update ---
-
-        if (!weatherResponse?.data) {
-          throw new Error("Weather API returned empty data");
-        }
-
         set({
           status: "success",
           data: {
             ...weatherResponse.data,
-            // Fallback to "Unknown" if locationData is somehow still missing
+            // current: {},
             city: locationData?.city ?? locationData?.state ?? "Unknown City",
             country: locationData?.country ?? "Unknown Country",
             formatted: locationData?.address_line2 ?? locationData?.formatted ?? ""

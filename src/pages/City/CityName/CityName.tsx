@@ -4,6 +4,7 @@ import * as S from "./CityName.styled";
 
 const CityName = () => {
   const currentWeather = useCurrentWeather();
+  console.log(currentWeather);
   if (!currentWeather) return null;
 
   const { city, formatted } = currentWeather;

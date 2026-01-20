@@ -1,5 +1,4 @@
 import React from "react";
-import { useTheme } from "styled-components";
 import { Scrollbar } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ReactComponent as HumiditySm } from "../../../assets/humidity-sm.svg";
@@ -13,7 +12,6 @@ import * as S from "./CityDuringDay.styled";
 
 const CityDuringDay = () => {
   const { data } = useLocale();
-  const theme = useTheme();
   let duringDay = useHourlyWeather();
   const duringDaySwitcher = useSettings((state) => state.duringDaySwitcher);
   const setDuringDaySwitcher = useSettings(
@@ -29,23 +27,22 @@ const CityDuringDay = () => {
     spaceBetween: 8,
     breakpoints: {
       425: {
-        slidesPerView: isDuringDaySwitcherIsShort ? 4 : 5,
-      },
-    },
+        slidesPerView: isDuringDaySwitcherIsShort ? 4 : 5
+      }
+    }
   };
 
   const duringDayRadioGroupItems = [
     {
       value: "short",
-      label: data.other.short,
+      label: data.other.short
     },
     {
       value: "24h",
-      label: `${duringDay?.length || "24"}${data.units.h}`,
-    },
+      label: `${duringDay?.length || "24"}${data.units.h}`
+    }
   ];
 
-  console.log('hello world');
 
   if (duringDaySwitcher === "short") {
     console.log(duringDay);
@@ -81,7 +78,7 @@ const CityDuringDay = () => {
                   <ShowWeatherIcon
                     iconId={day.icon}
                     iconDescription={day.description}
-                    theme={theme.type}
+                    isDay={day.isItDay}
                   />
                 </S.DayIcon>
                 <S.DayTemp>{day.temp}</S.DayTemp>

@@ -1,39 +1,38 @@
 import { useSettings } from "../store/useSettings";
 import { useWeather } from "../store/useWeather";
 import { WeatherDaily } from "../types/responses";
-import { formatTemperature, formatWind } from "../utils/format-converter";
+import { formatTemperature } from "../utils/format-converter";
 import { capitalize, clamp } from "../utils/helpers";
 import { useFormatDate } from "./useFormatDate";
 import { useLocale } from "./useLocale";
+import { getWeatherIcon } from "../constants/weather-icons";
 
 export const useDailyWeather = (numOfDays = 6) => {
-  const forecast = useWeather((state) => state.data?.daily);
+  const forecast = useWeather((state) => state.data?.forecast?.forecastday);
   const formatDate = useFormatDate();
   const tempMeasure = useSettings((state) => state.tempMeasure);
-  const windMeasure = useSettings((state) => state.windMeasure);
   const { data } = useLocale();
 
-  /** Number of forecast days. Max is 10 */
   const MIN_FORECAST_DAYS = 1;
-  const MAX_FORECAST_DAYS = 10;
+  const MAX_FORECAST_DAYS = forecast?.length || 1;
   const totalNumOfDays = clamp(numOfDays, MIN_FORECAST_DAYS, MAX_FORECAST_DAYS);
+  console.log("forecast", forecast);
 
-  return forecast?.slice(0, totalNumOfDays).map((day: WeatherDaily) => ({
+  return forecast?.slice(0, totalNumOfDays).map((forecastDay: WeatherDaily) => ({
     dt: {
-      timestamp: day.dt,
-      iso: formatDate.getISO(day.dt),
-      shortDate: formatDate.getShortDate(day.dt),
-      weekday: capitalize(formatDate.getRelativeWeekday(day.dt, data.weekdays)),
-      isWeekend: formatDate.isWeekend(day.dt),
+      timestamp: Number(forecastDay["date_epoch"]),
+      iso: formatDate.getISO(Number(forecastDay["date_epoch"])),
+      shortDate: formatDate.getShortDate(Number(forecastDay["date_epoch"])),
+      weekday: capitalize(formatDate.getRelativeWeekday(Number(forecastDay["date_epoch"]), data.weekdays)),
+      isWeekend: formatDate.isWeekend(Number(forecastDay["date_epoch"]))
     },
-    weatherId: day.weather[0].id,
-    icon: day.weather[0].icon,
+    weatherId: forecastDay.day?.condition?.code,
+    icon: getWeatherIcon(forecastDay.day?.condition?.code),
     temp: {
-      max: formatTemperature(day.temp.max, tempMeasure),
-      min: formatTemperature(day.temp.min, tempMeasure),
+      max: formatTemperature(forecastDay.day["maxtemp_c"], tempMeasure),
+      min: formatTemperature(forecastDay.day["mintemp_c"], tempMeasure)
     },
-    windSpeed: Number(day["wind_speed"]),
-    windSpeedFormatted: formatWind(Number(day["wind_speed"]), windMeasure),
-    pop: day.pop,
+    windSpeed: Number(forecastDay.day["maxwind_mph"].toFixed(1)),
+    pop: forecastDay.day["totalprecip_mm"]
   }));
 };

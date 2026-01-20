@@ -8,9 +8,13 @@ import {
   isTomorrow,
   isWeekend,
   isYesterday,
+  parse,
+  format
 } from "date-fns";
 import { dayPartIntervals, isNumInInterval } from "./date-helpers";
 import { LOCALE_DEFAULT } from "./locales";
+
+import { fromZonedTime, formatInTimeZone } from "date-fns-tz";
 
 type DateNum = Date | number;
 
@@ -26,6 +30,7 @@ type LocaleDayParts = {
   evening: string;
   night: string;
 };
+
 
 export class FormatDate {
   constructor(
@@ -43,6 +48,64 @@ export class FormatDate {
 
   public isWeekend(date: DateNum): boolean {
     return isWeekend(this.validateDate(date));
+  }
+
+  public getTimeAsEpoch(
+    timeString: string,
+    baseDate: DateNum = new Date()
+  ): number | null {
+    try {
+      const validBaseDate = this.validateDate(baseDate);
+
+      // 1. Get the date part in the target timezone (e.g., "2023-12-19")
+      const datePart = formatInTimeZone(validBaseDate, this.timezone, "yyyy-MM-dd");
+
+      // 2. Parse the input "05:15 PM" into a temporary Date object
+      //    We use 'hh:mm a' to tell date-fns exactly how to read "05:15 PM"
+      const parsedTime = parse(timeString, "hh:mm a", new Date());
+
+      // 3. Check if parsing worked
+      if (isNaN(parsedTime.getTime())) {
+        console.error("Invalid time format. Expected format like '05:15 PM'");
+        return null;
+      }
+
+      // 4. Convert that time to 24-hour format (e.g., "17:15")
+      const timePart = format(parsedTime, "HH:mm:ss");
+
+      // 5. Combine to create an ISO-like string: "2023-12-19 17:15:00"
+      //    fromZonedTime handles this format perfectly.
+      const fullDateTimeString = `${datePart} ${timePart}`;
+
+      // 6. Convert to Zoned Time
+      const dateObject = fromZonedTime(fullDateTimeString, this.timezone);
+
+      return Math.floor(dateObject.getTime() / 1000);
+    } catch (error) {
+      console.error(`Failed to parse time string: "${timeString}"`, error);
+      return null;
+    }
+  }
+
+  public isItDay(
+    date: DateNum = new Date(), // Defaults to 'now' if not provided
+    dayStartHour: number = 6,   // Defaults to 6:00 AM
+    dayEndHour: number = 18     // Defaults to 6:00 PM
+  ): boolean {
+    // 1. Get the numeric hour (0-23) in the class's Timezone
+    const hour = +intlFormat(
+      this.validateDate(date),
+      {
+        hour: "2-digit",
+        hour12: false,
+        timeZone: this.timezone
+      },
+      // Force en-US so we get standard digits for calculation
+      { locale: "en-US" }
+    );
+
+    // 2. Return true if between start (inclusive) and end (exclusive)
+    return hour >= dayStartHour && hour < dayEndHour;
   }
 
   public getWeekday(date: DateNum) {
@@ -63,7 +126,7 @@ export class FormatDate {
       {
         hour: "2-digit",
         hour12: false,
-        timeZone: this.timezone,
+        timeZone: this.timezone
       },
       { locale: this.locale }
     );
@@ -104,7 +167,7 @@ export class FormatDate {
       localeWeekdays = {
         tomorrow: "Tomorrow",
         today: "Today",
-        yesterday: "Yesterday",
+        yesterday: "Yesterday"
       };
     }
 
@@ -142,7 +205,7 @@ export class FormatDate {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,
-        timeZone: this.timezone,
+        timeZone: this.timezone
       },
       { locale: this.locale }
     );
@@ -151,7 +214,7 @@ export class FormatDate {
   public getDayDuration(date1: DateNum, date2: DateNum) {
     return intervalToDuration({
       start: this.validateDate(date1),
-      end: this.validateDate(date2),
+      end: this.validateDate(date2)
     });
   }
 
@@ -165,7 +228,7 @@ export class FormatDate {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,
-        timeZone: this.timezone,
+        timeZone: this.timezone
       },
       { locale: this.locale }
     );
