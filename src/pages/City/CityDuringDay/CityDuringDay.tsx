@@ -45,7 +45,6 @@ const CityDuringDay = () => {
 
 
   if (duringDaySwitcher === "short") {
-    console.log(duringDay);
     duringDay = duringDay?.filter(
       (hour) => Number(hour.dt.time.slice(0, 2)) % 6 === 0
     );

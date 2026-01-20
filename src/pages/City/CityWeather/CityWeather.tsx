@@ -13,7 +13,6 @@ const CityWeather = () => {
   const { data } = useLocale();
   const description = data.weatherCondition[weather.weatherId];
   const currentIsoDate = new Date().toISOString();
-  console.log("Current Weather: ", weather);
 
 
   return (

@@ -15,8 +15,6 @@ const CityAstro = () => {
   const { dayDuration, coords, sunrise, sunset } = currentWeather.astro;
   const fd = useFormatDate();
 
-  console.log(dayDuration);
-
   const { percent, isSunPhase, current } =
     timeToPercent(coords);
 
